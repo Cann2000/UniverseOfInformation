@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="selectedHistory"
+            type="com.example.universeofinformation.model.History" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.HistoryDetailsFragment">
+
+        <ImageView
+            android:id="@+id/warImageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:minHeight="200dp"
+            android:scaleType="fitCenter"
+            android:downloadImage="@{selectedHistory.imageUrl}">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/warName"
+            android:layout_below="@+id/warImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:text="@{selectedHistory.warName}"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="8dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/warHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/warName"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@{selectedHistory.warHistory}"
+            android:textSize="18sp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/warInformation"
+            android:layout_below="@+id/warHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@{selectedHistory.warInformation}"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/countries"
+            android:layout_below="@+id/warInformation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@{selectedHistory.countries}"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="8dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/warWinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/countries"
+            android:textAlignment="center"
+            android:text="@{selectedHistory.winner}"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="18sp">
+
+        </TextView>
+    </RelativeLayout>
+</layout>

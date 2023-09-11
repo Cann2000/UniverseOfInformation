@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homePageFragment">
+
+    <fragment
+        android:id="@+id/historyListFragment"
+        android:name="com.example.universeofinformation.view.HistoryListFragment"
+        android:label="HistoryListFragment"
+        tools:layout="@layout/fragment_history_list">
+        <action
+            android:id="@+id/action_historyListFragment_to_historyDetailsFragment"
+            app:destination="@id/historyDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyDetailsFragment"
+        android:name="com.example.universeofinformation.view.HistoryDetailsFragment"
+        android:label="HistoryDetailsFragment"
+        tools:layout="@layout/fragment_history_details">
+        <argument
+            android:name="historyId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/homePageFragment"
+        android:name="com.example.universeofinformation.view.HomePageFragment"
+        android:label="fragment_home_page"
+        tools:layout="@layout/fragment_home_page" >
+        <action
+            android:id="@+id/action_homePageFragment_to_historyListFragment"
+            app:destination="@id/historyListFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_geographicalEventsFragment"
+            app:destination="@id/geographicalEventsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/geographicalEventsFragment"
+        android:name="com.example.universeofinformation.view.GeographicEventListFragment"
+        android:label="fragment_geographical_events"
+        tools:layout="@layout/fragment_geographic_event_list" />
+</navigation>
