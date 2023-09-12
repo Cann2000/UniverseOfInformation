@@ -2,10 +2,13 @@ package com.example.universeofinformation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.universeofinformation.adapter.DataAdapter
 import com.example.universeofinformation.model.GeographicEvent
 import com.example.universeofinformation.repository.APIRepository
 import com.example.universeofinformation.repository.GeographicQueryRepository
+import com.example.universeofinformation.repository.SharedPreferencesRepository
+import com.example.universeofinformation.utility.Constants.updateTime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -17,7 +20,7 @@ import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
-class GeographicEventListViewModel @Inject constructor(private val apiRepository: APIRepository, private val geographicQueryRepository: GeographicQueryRepository) :ViewModel() {
+class GeographicEventListViewModel @Inject constructor(private val apiRepository: APIRepository, private val geographicQueryRepository: GeographicQueryRepository, private val sharedPreferencesRepository: SharedPreferencesRepository) :ViewModel() {
 
     val geographicalEvents = MutableLiveData<List<GeographicEvent>>()
     val errorMessage = MutableLiveData<Boolean>()
@@ -30,6 +33,20 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
         println(throwable.localizedMessage)
     }
 
+
+    fun refreshData(){
+
+        val saveTime = sharedPreferencesRepository.takeTime()
+
+        if (saveTime != null && saveTime != 0L && System.nanoTime() - saveTime < updateTime){ // updateTime in Constants
+            //Sqlite'tan çek
+            getDataFromSql()
+            println("sql")
+        } else {
+            getDataFromInternet()
+            println("internet")
+        }
+    }
 
     fun showGeographicalEvents(geographicEventList:List<GeographicEvent>){
 
@@ -62,10 +79,29 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
             }
         }
     }
+    private fun getDataFromSql(){
 
+        job = viewModelScope.launch {
+
+            val geographicEventList = geographicQueryRepository.getAllGeographicalEvent()
+
+            if(geographicEventList != null && geographicEventList.isNotEmpty()){ // bu koşul eğer hiç internetten veri çekmeden ve sqle veri kaydetmeden sqlden veri çekmesini engeller
+
+                withContext(Dispatchers.Main){
+
+                    showGeographicalEvents(geographicEventList)
+                }
+            }
+            else{
+
+                getDataFromInternet()
+            }
+        }
+    }
     private suspend fun saveToSql(geographicList: List<GeographicEvent>){
 
         geographicQueryRepository.insertAllGeographicEvent(geographicList)
+        sharedPreferencesRepository.saveTime(System.nanoTime())
     }
 
 
@@ -107,5 +143,10 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
                 }
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        job?.cancel()
     }
 }

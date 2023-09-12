@@ -41,7 +41,7 @@ class GeographicEventListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(GeographicEventListViewModel::class.java)
-        viewModel.getDataFromInternet()
+        viewModel.refreshData()
 
         binding.geographicalEventsRecycler.adapter = adapter
         binding.geographicalEventsRecycler.layoutManager = LinearLayoutManager(requireView().context)

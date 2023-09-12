@@ -1,30 +1,31 @@
 package com.example.universeofinformation.view
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import com.example.universeofinformation.R
+import com.example.universeofinformation.databinding.FragmentGeographicEventDetailsBinding
 import com.example.universeofinformation.databinding.FragmentHistoryDetailsBinding
-import com.example.universeofinformation.viewmodel.HistoryDetailsViewModel
+import com.example.universeofinformation.viewmodel.GeographicEventDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @AndroidEntryPoint
-class HistoryDetailsFragment : Fragment() {
+class GeographicEventDetailsFragment : Fragment() {
 
-    private var _dataBinding: FragmentHistoryDetailsBinding? = null
+    private var _dataBinding: FragmentGeographicEventDetailsBinding? = null
     private val dataBinding get() = _dataBinding!!
 
-    private lateinit var viewModel: HistoryDetailsViewModel
-
+    private lateinit var viewModel: GeographicEventDetailsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -32,33 +33,34 @@ class HistoryDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _dataBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_history_details,container, false)
+        _dataBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_geographic_event_details,container, false)
         val view = dataBinding.root
         return view
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        setMenuVisibility(false)
-
-        viewModel = ViewModelProvider(this).get(HistoryDetailsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(GeographicEventDetailsViewModel::class.java)
 
         arguments?.let {
-            val historyId = HistoryDetailsFragmentArgs.fromBundle(it).historyId
-            viewModel.getRoomData(historyId)
+
+            val geographicEventId = GeographicEventDetailsFragmentArgs.fromBundle(it).geographicEventId
+            viewModel.getGeographicEvent(geographicEventId)
         }
 
-        observeLiveData()
-
+        obserLiveData()
     }
 
-    fun observeLiveData()
+
+    fun obserLiveData()
     {
-        viewModel.historyLiveData.observe(viewLifecycleOwner, Observer {
-            dataBinding.selectedHistory = it
+        viewModel.geographicEventLiveData.observe(viewLifecycleOwner, Observer {
+
+            it?.let {
+
+                dataBinding.selectedGeographicEvent = it
+            }
         })
     }
 }

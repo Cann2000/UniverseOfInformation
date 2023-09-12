@@ -6,6 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.universeofinformation.R
 
 fun ImageView.uploadImage(url:String?, placeholder: CircularProgressDrawable)
 {

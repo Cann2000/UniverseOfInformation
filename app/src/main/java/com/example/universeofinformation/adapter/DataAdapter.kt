@@ -13,6 +13,8 @@ import com.example.universeofinformation.databinding.RecyclerRowGeographicEventL
 import com.example.universeofinformation.databinding.RecyclerRowHistoryListBinding
 import com.example.universeofinformation.model.GeographicEvent
 import com.example.universeofinformation.model.History
+import com.example.universeofinformation.view.GeographicEventListFragment
+import com.example.universeofinformation.view.GeographicEventListFragmentDirections
 import com.example.universeofinformation.view.HistoryListFragmentDirections
 
 class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -42,12 +44,12 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
 
         override fun dataClicked(view: View) {
 
-            val history = binding.geographicEvent
+            val geographicEvent = binding.geographicEvent
 
-            if(history!=null)
+            if(geographicEvent!=null)
             {
-                //val action = HistoryListFragmentDirections.actionHistoryListFragmentToHistoryDetailsFragment(history.uuid!!)
-                //Navigation.findNavController(view).navigate(action)
+                val action = GeographicEventListFragmentDirections.actionGeographicalEventsFragmentToGeographicEventDetailsFragment(geographicEvent.uuid!!)
+                Navigation.findNavController(view).navigate(action)
             }
         }
 

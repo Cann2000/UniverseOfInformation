@@ -20,11 +20,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomePageFragment : Fragment() {
 
-    private lateinit var viewModel:HomePageViewModel
-    private val adapter = HomePageAdapter(arrayListOf())
-
     private var _binding: FragmentHomePageBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var viewModel:HomePageViewModel
+    private val adapter = HomePageAdapter(arrayListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

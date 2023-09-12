@@ -19,7 +19,7 @@ class HistoryDetailsViewModel@Inject constructor(private val historyQueryReposit
     {
         viewModelScope.launch {
             try {
-                //Bu işlem ana iş parçacığında yapılıyormuş gibi görünse de, databaseRepository.getHistory(uuid) withContext(Dispatchers.IO) içinde çalıştığı için arka planda çalışır.
+                //Bu işlem ana iş parçacığında yapılıyormuş gibi görünse de, historyQueryRepository.getHistory(uuid) withContext(Dispatchers.IO) içinde çalıştığı için arka planda çalışır.
                 val history = historyQueryRepository.getHistory(uuid)
                 historyLiveData.value = history
 
@@ -28,5 +28,6 @@ class HistoryDetailsViewModel@Inject constructor(private val historyQueryReposit
                 e.printStackTrace()
             }
         }
+
     }
 }

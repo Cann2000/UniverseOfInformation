@@ -39,5 +39,18 @@
         android:id="@+id/geographicalEventsFragment"
         android:name="com.example.universeofinformation.view.GeographicEventListFragment"
         android:label="fragment_geographical_events"
-        tools:layout="@layout/fragment_geographic_event_list" />
+        tools:layout="@layout/fragment_geographic_event_list" >
+        <action
+            android:id="@+id/action_geographicalEventsFragment_to_geographicEventDetailsFragment"
+            app:destination="@id/geographicEventDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/geographicEventDetailsFragment"
+        android:name="com.example.universeofinformation.view.GeographicEventDetailsFragment"
+        android:label="GeographicEventDetailsFragment"
+        tools:layout="@layout/fragment_geographic_event_details" >
+        <argument android:name="geographicEventId"
+            app:argType="integer" />
+    </fragment>
+
 </navigation>

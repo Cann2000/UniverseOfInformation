@@ -3,10 +3,13 @@ package com.example.universeofinformation.viewmodel
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.universeofinformation.adapter.DataAdapter
 import com.example.universeofinformation.model.History
 import com.example.universeofinformation.repository.APIRepository
 import com.example.universeofinformation.repository.HistoryQueryRepository
+import com.example.universeofinformation.repository.SharedPreferencesRepository
+import com.example.universeofinformation.utility.Constants.updateTime
 import com.example.universeofinformation.utility.HiddenSharedPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -21,19 +24,17 @@ import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
-class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepository,private val historyQueryRepository: HistoryQueryRepository) : ViewModel() {
+class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepository,private val historyQueryRepository: HistoryQueryRepository, private val sharedPreferencesRepository: SharedPreferencesRepository) : ViewModel() {
 
     val history = MutableLiveData<List<History>>()
     val errorMessage = MutableLiveData<Boolean>()
     val uploading = MutableLiveData<Boolean>()
 
     private lateinit var historyList:List<History>
-    private val hiddenSharedPreferences = HiddenSharedPreferences()
 
 
     //private val compositeDisposable = CompositeDisposable()
 
-    private var updateTime = 0.1 * 60 * 1000* 1000 * 1000L
 
     private var job: Job? = null
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
@@ -42,11 +43,11 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
 
     fun refreshData()
     {
-        val saveTime = hiddenSharedPreferences.takeTime()
+        val saveTime = sharedPreferencesRepository.takeTime()
 
-        if (saveTime != null && saveTime != 0L && System.nanoTime() - saveTime < saveTime){
+        if (saveTime != null && saveTime != 0L && System.nanoTime() - saveTime < updateTime ){ // updateTime in Constants
             //Sqlite'tan çek
-            getDataSql()
+            getDataFromSql()
             println("sql")
         } else {
             getDataFromInternet()
@@ -68,8 +69,9 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
     }
     private fun getDataFromInternet()
     {
-        uploading.value = true
+        println("internet2")
 
+        uploading.value = true
 
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
 
@@ -92,19 +94,22 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
         }
 
     }
-    private fun getDataSql() {
+    private fun getDataFromSql() {
 
-        job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+        job = viewModelScope.launch {
 
             val historyList = historyQueryRepository.getAllHistory()
 
-            historyList?.let {
-
+            println(historyList)
+            if(historyList != null && historyList.isNotEmpty()) // bu koşul eğer hiç internetten veri çekmeden ve sqle veri kaydetmeden sqlden veri çekmesini engeller
+            {
                 withContext(Dispatchers.Main)
                 {
-                    showHistory(it)
-
+                    showHistory(historyList)
                 }
+            }
+            else{
+                getDataFromInternet()
             }
         }
     }
@@ -112,6 +117,8 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
     private suspend fun saveToSql(historyList: List<History>)
     {
         historyQueryRepository.insertAllHistory(historyList)
+
+        sharedPreferencesRepository.saveTime(System.nanoTime())
     }
 
     fun searchViewFilterList(query:String?,adapter:DataAdapter)
@@ -130,18 +137,12 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
                         if (warName?.startsWith(query) == true) {
                             filteredList.add(it)
                         }
-                    }
-                    if (filteredList.isEmpty()) {
+                        else {
 
-                        withContext(Dispatchers.Main)
-                        {
-                            //Toast.makeText(coroutineContext, "No Data found", Toast.LENGTH_SHORT).show()
-                        }
-                    } else {
-
-                        withContext(Dispatchers.Main)
-                        {
-                            adapter.setFilteredList(filteredList)
+                            withContext(Dispatchers.Main)
+                            {
+                                adapter.setFilteredList(filteredList)
+                            }
                         }
                     }
                 }
@@ -161,4 +162,5 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
         super.onCleared()
         job?.cancel()
     }
+
 }
