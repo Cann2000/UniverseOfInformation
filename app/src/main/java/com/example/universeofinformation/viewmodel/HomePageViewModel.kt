@@ -23,25 +23,20 @@ class HomePageViewModel:ViewModel() {
 
     fun getData(){
 
-        job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+        val contentList = ArrayList<HomePageContent>()
 
-            val contentList = ArrayList<HomePageContent>()
+        contentList.clear()
 
-            contentList.clear()
+        val contentHistory = HomePageContent("Tarih","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToHistoryListFragment())
+        val contentGeography = HomePageContent("Coğrafi Olaylar","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToGeographicalEventsFragment())
+        val contentUniverse = HomePageContent("Evren","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToLiteratureListFragment())
 
-            val contentHistory = HomePageContent("Tarih","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToHistoryListFragment())
-            val contentGeography = HomePageContent("Coğrafi Olaylar","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToGeographicalEventsFragment())
-            val contentUniverse = HomePageContent("Evren","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToHistoryListFragment())
+        contentList.add(contentHistory)
+        contentList.add(contentGeography)
+        contentList.add(contentUniverse)
 
-            contentList.add(contentHistory)
-            contentList.add(contentGeography)
-            contentList.add(contentUniverse)
+        homePageContent.value = contentList
 
-            withContext(Dispatchers.Main){
-
-                homePageContent.value = contentList
-            }
-        }
     }
 
     override fun onCleared() {

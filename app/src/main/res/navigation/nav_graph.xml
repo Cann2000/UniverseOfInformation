@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_homePageFragment_to_geographicalEventsFragment"
             app:destination="@id/geographicalEventsFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_literatureListFragment"
+            app:destination="@id/literatureListFragment" />
     </fragment>
     <fragment
         android:id="@+id/geographicalEventsFragment"
@@ -50,6 +53,24 @@
         android:label="GeographicEventDetailsFragment"
         tools:layout="@layout/fragment_geographic_event_details" >
         <argument android:name="geographicEventId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/literatureListFragment"
+        android:name="com.example.universeofinformation.view.LiteratureListFragment"
+        android:label="LiteratureListFragment"
+        tools:layout="@layout/fragment_literature_list" >
+        <action
+            android:id="@+id/action_literatureListFragment_to_literatureDetailsFragment"
+            app:destination="@id/literatureDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/literatureDetailsFragment"
+        android:name="com.example.universeofinformation.view.LiteratureDetailsFragment"
+        android:label="LiteratureDetailsFragment"
+        tools:layout="@layout/fragment_literature_details">
+        <argument
+            android:name="literatureId"
             app:argType="integer" />
     </fragment>
 

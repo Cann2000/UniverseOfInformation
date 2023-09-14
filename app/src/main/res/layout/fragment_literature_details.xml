@@ -6,17 +6,17 @@
 
     <data>
         <variable
-            name="selectedHistory"
-            type="com.example.universeofinformation.model.History" />
+            name="selectedLiterature"
+            type="com.example.universeofinformation.model.Literature" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.HistoryDetailsFragment">
+        tools:context=".view.LiteratureDetailsFragment">
 
         <ImageView
-            android:id="@+id/warImageView"
+            android:id="@+id/literatureImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -26,47 +26,47 @@
             android:layout_marginBottom="10dp"
             android:minHeight="200dp"
             android:scaleType="fitCenter"
-            android:downloadImage="@{selectedHistory.imageUrl}">
+            android:downloadImage="@{selectedLiterature.imageUrl}">
 
         </ImageView>
 
         <TextView
-            android:id="@+id/warName"
-            android:layout_below="@+id/warImageView"
+            android:id="@+id/workName"
+            android:layout_below="@+id/literatureImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textAlignment="center"
-            android:text="@{selectedHistory.warName}"
+            android:text="@{selectedLiterature.workName}"
             android:layout_centerHorizontal="true"
             android:layout_margin="8dp">
 
         </TextView>
 
         <TextView
-            android:id="@+id/warHistory"
+            android:id="@+id/author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/warName"
+            android:layout_below="@+id/workName"
             android:textAlignment="center"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@{selectedHistory.warHistory}"
-            android:textSize="18sp">
+            android:text="@{selectedLiterature.author}"
+            android:textSize="20sp">
 
         </TextView>
 
         <TextView
-            android:id="@+id/warInformation"
-            android:layout_below="@+id/warHistory"
+            android:id="@+id/workType"
+            android:layout_below="@+id/author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="@{selectedHistory.warInformation}"
+            android:text="@{selectedLiterature.workType}"
             android:textSize="18sp"
             android:layout_centerHorizontal="true"
             android:layout_margin="15dp">
@@ -74,31 +74,31 @@
         </TextView>
 
         <TextView
-            android:id="@+id/countries"
-            android:layout_below="@+id/warInformation"
+            android:id="@+id/summary"
+            android:layout_below="@+id/workType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="@{selectedHistory.countries}"
-            android:textSize="18sp"
+            android:text="@{selectedLiterature.summary}"
+            android:textSize="20sp"
             android:layout_centerHorizontal="true"
             android:layout_margin="8dp">
 
         </TextView>
 
         <TextView
-            android:id="@+id/warWinner"
+            android:id="@+id/period"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/countries"
+            android:layout_below="@+id/summary"
             android:textAlignment="center"
-            android:text="@{selectedHistory.winner}"
+            android:text="@{selectedLiterature.period}"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="18dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:textSize="20sp">
+            android:textSize="18sp">
 
         </TextView>
     </RelativeLayout>

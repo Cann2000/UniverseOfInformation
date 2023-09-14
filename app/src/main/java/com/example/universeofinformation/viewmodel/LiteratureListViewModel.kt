@@ -5,10 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.universeofinformation.adapter.DataAdapter
 import com.example.universeofinformation.model.GeographicEvent
+import com.example.universeofinformation.model.Literature
 import com.example.universeofinformation.repository.APIRepository
-import com.example.universeofinformation.repository.GeographicQueryRepository
+import com.example.universeofinformation.repository.LiteratureQueryRepository
 import com.example.universeofinformation.repository.SharedPreferencesRepository
-import com.example.universeofinformation.utility.Constants.updateTime
+import com.example.universeofinformation.utility.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -20,25 +21,24 @@ import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
-class GeographicEventListViewModel @Inject constructor(private val apiRepository: APIRepository, private val geographicQueryRepository: GeographicQueryRepository, private val sharedPreferencesRepository: SharedPreferencesRepository) :ViewModel() {
+class LiteratureListViewModel@Inject constructor(private val apiRepository: APIRepository, private val literatureQueryRepository: LiteratureQueryRepository, private val sharedPreferencesRepository: SharedPreferencesRepository):ViewModel() {
 
-    val geographicalEvents = MutableLiveData<List<GeographicEvent>>()
+    val literature = MutableLiveData<List<Literature>>()
     val errorMessage = MutableLiveData<Boolean>()
     val uploading = MutableLiveData<Boolean>()
 
-    private lateinit var geographicEventList:List<GeographicEvent>
+    private lateinit var literatureList: List<Literature>
 
     private var job: Job? = null
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         println(throwable.localizedMessage)
     }
 
-
     fun refreshData(){
 
         val saveTime = sharedPreferencesRepository.takeTime()
 
-        if (saveTime != null && saveTime != 0L && System.nanoTime() - saveTime < updateTime){ // updateTime in Constants
+        if (saveTime != null && saveTime != 0L && System.nanoTime() - saveTime < Constants.updateTime){ // updateTime in Constants
             //Sqlite'tan çek
             getDataFromSql()
             println("sql")
@@ -53,66 +53,64 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
         getDataFromInternet()
     }
 
-    fun showGeographicalEvents(geographicEventList:List<GeographicEvent>){
+    fun showLiteraryWorks(literatureList:List<Literature>){
 
-        geographicalEvents.value = geographicEventList
-        this.geographicEventList = geographicEventList
+        literature.value = literatureList
+        this.literatureList = literatureList
         errorMessage.value = false
         uploading.value = false
     }
 
-    fun getDataFromInternet()
-    {
+    private fun getDataFromInternet(){
+
         uploading.value = true
 
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
 
             val response = apiRepository.getData()
 
-            if (response.isSuccessful) {
+            val literaryWorks = response.body()?.literary_works
 
-                val geographicalEvents = response.body()?.geographical_events
+            literaryWorks?.let {
 
-                geographicalEvents?.let {
+                saveToSql(it)
 
-                    saveToSql(it)
+                withContext(Dispatchers.Main){
 
-                    withContext(Dispatchers.Main){
-
-                        showGeographicalEvents(it)
-                    }
+                    showLiteraryWorks(it)
                 }
             }
         }
     }
-    private fun getDataFromSql(){
+
+    private fun getDataFromSql() {
 
         job = viewModelScope.launch {
 
-            val geographicEventList = geographicQueryRepository.getAllGeographicalEvent()
+            val literatureList = literatureQueryRepository.getAllLiterature()
 
-            if(!geographicEventList.isNullOrEmpty()){ // bu koşul eğer hiç internetten veri çekmeden ve sqle veri kaydetmeden sqlden veri çekmesini engeller
+            if(!literatureList.isNullOrEmpty()){
 
                 withContext(Dispatchers.Main){
 
-                    showGeographicalEvents(geographicEventList)
+                    showLiteraryWorks(literatureList)
                 }
             }
             else{
-
                 getDataFromInternet()
             }
         }
     }
-    private suspend fun saveToSql(geographicList: List<GeographicEvent>){
 
-        geographicQueryRepository.insertAllGeographicEvent(geographicList)
+    private suspend fun saveToSql(literatureList: List<Literature>){
+
+        literatureQueryRepository.insertAllLiterature(literatureList)
 
         sharedPreferencesRepository.saveTime(System.nanoTime())
+
     }
 
-
-    fun searchViewFilterList(query:String?,adapter:DataAdapter){
+    fun searchViewFilterList(query:String?,adapter: DataAdapter){
 
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
 
@@ -121,11 +119,11 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
                 val filteredList = ArrayList<Any>()
 
 
-                if(geographicEventList != null){
+                if(literatureList != null){
 
-                    geographicEventList.forEach {
+                    literatureList.forEach {
 
-                        val geographicEventName = it.eventName?.lowercase(Locale.ROOT)
+                        val geographicEventName = it.workName?.lowercase(Locale.ROOT)
                         if(geographicEventName?.startsWith(query) == true){
 
                             filteredList.add(it)
@@ -145,7 +143,7 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
 
                 withContext(Dispatchers.Main){
 
-                    adapter.dataListUpdate(geographicEventList)
+                    adapter.dataListUpdate(literatureList)
 
                 }
             }

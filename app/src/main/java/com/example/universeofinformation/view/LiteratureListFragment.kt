@@ -8,19 +8,22 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.universeofinformation.R
 import com.example.universeofinformation.adapter.DataAdapter
-import com.example.universeofinformation.databinding.FragmentGeographicEventListBinding
-import com.example.universeofinformation.viewmodel.GeographicEventListViewModel
+import com.example.universeofinformation.databinding.FragmentHistoryListBinding
+import com.example.universeofinformation.databinding.FragmentLiteratureListBinding
+import com.example.universeofinformation.viewmodel.LiteratureListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GeographicEventListFragment : Fragment() {
+class LiteratureListFragment : Fragment() {
 
-    private var _binding: FragmentGeographicEventListBinding? = null
+    private var _binding: FragmentLiteratureListBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel : GeographicEventListViewModel
+    private lateinit var viewModel: LiteratureListViewModel
     private val adapter = DataAdapter(arrayListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +35,7 @@ class GeographicEventListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentGeographicEventListBinding.inflate(inflater, container, false)
+        _binding = FragmentLiteratureListBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -40,14 +43,15 @@ class GeographicEventListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(GeographicEventListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(LiteratureListViewModel::class.java)
         viewModel.refreshData()
 
-        binding.geographicalEventsRecycler.adapter = adapter
-        binding.geographicalEventsRecycler.layoutManager = LinearLayoutManager(requireView().context)
-        binding.geographicalEventsRecycler.setHasFixedSize(true)
+        binding.literatureRecycler.adapter = adapter
+        binding.literatureRecycler.layoutManager = LinearLayoutManager(requireView().context)
+        binding.literatureRecycler.setHasFixedSize(true)
 
         binding.swipeRefreshLayout.setOnRefreshListener {
+
             binding.errorText.visibility = View.GONE
             binding.loadProgressBar.visibility = View.VISIBLE
 
@@ -56,7 +60,7 @@ class GeographicEventListFragment : Fragment() {
             binding.swipeRefreshLayout.isRefreshing = false
         }
 
-        binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 binding.searchView.clearFocus()
                 return false
@@ -66,44 +70,38 @@ class GeographicEventListFragment : Fragment() {
                 viewModel.searchViewFilterList(newText,adapter)
                 return true
             }
-
         })
 
         observeLiveData()
     }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
-    private fun observeLiveData(){
+    fun observeLiveData(){
 
-        viewModel.geographicalEvents.observe(viewLifecycleOwner, Observer {
+        viewModel.literature.observe(viewLifecycleOwner, Observer {
 
-            it?.let {
-
-                binding.geographicalEventsRecycler.visibility = View.VISIBLE
-                adapter.dataListUpdate(it)
-            }
+            binding.literatureRecycler.visibility = View.VISIBLE
+            adapter.dataListUpdate(it)
         })
+
         viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
 
             it?.let {
 
                 if (it) {
-                    binding.geographicalEventsRecycler.visibility = View.GONE
+                    binding.literatureRecycler.visibility = View.GONE
                     binding.errorText.visibility = View.VISIBLE
                 } else {
                     binding.errorText.visibility = View.INVISIBLE
                 }
             }
         })
+
         viewModel.uploading.observe(viewLifecycleOwner, Observer {
 
             it?.let {
 
                 if (it) {
-                    binding.geographicalEventsRecycler.visibility = View.GONE
+                    binding.literatureRecycler.visibility = View.GONE
                     binding.errorText.visibility = View.GONE
                     binding.loadProgressBar.visibility = View.VISIBLE
                 } else {
@@ -111,5 +109,9 @@ class GeographicEventListFragment : Fragment() {
                 }
             }
         })
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

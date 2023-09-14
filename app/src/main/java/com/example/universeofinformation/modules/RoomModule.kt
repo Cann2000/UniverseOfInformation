@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.universeofinformation.service.dao.HistoryDao
 import com.example.universeofinformation.service.Room_Database
 import com.example.universeofinformation.service.dao.GeographicEventDao
+import com.example.universeofinformation.service.dao.LiteratureDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,5 +33,10 @@ class RoomModule {
     @Provides
     fun getGeographicEventDao(database: Room_Database): GeographicEventDao {
         return database.geographicEventDao()
+    }
+    @Singleton
+    @Provides
+    fun getLiteratureDao(database: Room_Database): LiteratureDao {
+        return database.literatureDao()
     }
 }

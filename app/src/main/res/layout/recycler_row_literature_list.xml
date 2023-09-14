@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="literature"
+            type="com.example.universeofinformation.model.Literature" />
+        <variable
+            name="listener"
+            type="com.example.universeofinformation.adapter.ClickListener"/>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:onClick="@{listener::dataClicked}"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/literatureRecyclerImageView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:layout_weight="2"
+            android:downloadImage="@{literature.imageUrl}">
+
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/starImage"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="15dp">
+                </ImageView>
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/literatureWorkName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="@{literature.workName}"
+                android:layout_margin="8dp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/literatureAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@{literature.author}"
+                android:layout_margin="8dp">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

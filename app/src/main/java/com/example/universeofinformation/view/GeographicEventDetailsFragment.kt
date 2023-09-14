@@ -52,13 +52,16 @@ class GeographicEventDetailsFragment : Fragment() {
         obserLiveData()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _dataBinding = null
+    }
 
     fun obserLiveData()
     {
         viewModel.geographicEventLiveData.observe(viewLifecycleOwner, Observer {
 
             it?.let {
-
                 dataBinding.selectedGeographicEvent = it
             }
         })

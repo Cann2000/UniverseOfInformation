@@ -11,16 +11,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.universeofinformation.R
 import com.example.universeofinformation.databinding.RecyclerRowGeographicEventListBinding
 import com.example.universeofinformation.databinding.RecyclerRowHistoryListBinding
+import com.example.universeofinformation.databinding.RecyclerRowLiteratureListBinding
 import com.example.universeofinformation.model.GeographicEvent
 import com.example.universeofinformation.model.History
-import com.example.universeofinformation.view.GeographicEventListFragment
+import com.example.universeofinformation.model.Literature
 import com.example.universeofinformation.view.GeographicEventListFragmentDirections
 import com.example.universeofinformation.view.HistoryListFragmentDirections
+import com.example.universeofinformation.view.LiteratureListFragmentDirections
 
 class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val HISTORY = 1
     private val GEOGRAPHICAL_EVENT = 2
+    private val LITERATURE = 3
 
     class HistoryHolder(val binding: RecyclerRowHistoryListBinding): RecyclerView.ViewHolder(binding.root),ClickListener
     {
@@ -59,6 +62,24 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
 
     }
 
+    class LiteratureHolder(val binding: RecyclerRowLiteratureListBinding): RecyclerView.ViewHolder(binding.root),ClickListener{
+
+        override fun dataClicked(view: View) {
+
+            val literature = binding.literature
+
+            if(literature!=null)
+            {
+                val action = LiteratureListFragmentDirections.actionLiteratureListFragmentToLiteratureDetailsFragment(literature.uuid!!)
+                Navigation.findNavController(view).navigate(action)
+            }
+        }
+
+        override fun starClicked(view: View) {
+            binding.starImage.setBackgroundColor(Color.YELLOW)
+        }
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -89,6 +110,16 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
 
                 GeographicalEventHolder(binding)
             }
+            LITERATURE ->{
+                binding = DataBindingUtil.inflate<RecyclerRowLiteratureListBinding>(
+                    inflater,
+                    R.layout.recycler_row_literature_list,
+                    parent,
+                    false
+                )
+
+                LiteratureHolder(binding)
+            }
             else -> throw IllegalArgumentException("Unknown viewType: $viewType")
         }
     }
@@ -105,6 +136,10 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
                 holder.binding.geographicEvent = dataList[position] as GeographicEvent
                 holder.binding.listener = holder
             }
+            is LiteratureHolder ->{
+                holder.binding.literature = dataList[position] as Literature
+                holder.binding.listener = holder
+            }
         }
     }
 
@@ -115,10 +150,13 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
     }
 
     override fun getItemViewType(position: Int): Int {
+
         // Pozisyona göre veri türünü belirleyin ve viewType olarak döndürün
         return when (dataList[position]) {
+
             is History -> HISTORY
             is GeographicEvent -> GEOGRAPHICAL_EVENT
+            is Literature -> LITERATURE
             else -> throw IllegalArgumentException("Unknown data type")
         }
     }

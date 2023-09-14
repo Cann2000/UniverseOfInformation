@@ -53,13 +53,13 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
             getDataFromInternet()
             println("internet")
         }
-
-
     }
+
     fun refreshInternet(){
 
         getDataFromInternet()
     }
+
     private fun showHistory(historyList:List<History>)
     {
         history.value=historyList
@@ -101,7 +101,7 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
             val historyList = historyQueryRepository.getAllHistory()
 
             println(historyList)
-            if(historyList != null && historyList.isNotEmpty()) // bu koşul eğer hiç internetten veri çekmeden ve sqle veri kaydetmeden sqlden veri çekmesini engeller
+            if(!historyList.isNullOrEmpty()) // bu koşul eğer hiç internetten veri çekmeden ve sqle veri kaydetmeden sqlden veri çekmesini engeller
             {
                 withContext(Dispatchers.Main)
                 {
@@ -136,12 +136,16 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
                         val warName = it.warName?.lowercase(Locale.ROOT)
                         if (warName?.startsWith(query) == true) {
                             filteredList.add(it)
+
+                            println("a")
                         }
                         else {
 
                             withContext(Dispatchers.Main)
                             {
                                 adapter.setFilteredList(filteredList)
+                                println("b")
+
                             }
                         }
                     }
