@@ -91,6 +91,8 @@ class CountryListViewModel@Inject constructor(private val apiRepository: APIRepo
 
         job = viewModelScope.launch {
 
+            uploading.value = true
+
             val countryList = countryQueryRepository.getAllCountry()
 
             if(!countryList.isNullOrEmpty()){ // bu koşul eğer hiç internetten veri çekmeden ve sqle veri kaydetmeden sqlden veri çekmesini engeller

@@ -109,7 +109,7 @@ class CountryListFragment : Fragment() {
 
                 if (it) {
                     binding.countryRecycler.visibility = View.GONE
-                    binding.errorText.visibility = View.GONE
+                    binding.errorText.visibility = View.INVISIBLE
                     binding.loadProgressBar.visibility = View.VISIBLE
                 } else {
                     binding.loadProgressBar.visibility = View.GONE

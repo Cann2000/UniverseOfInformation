@@ -98,6 +98,8 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
 
         job = viewModelScope.launch {
 
+            uploading.value = true
+
             val historyList = historyQueryRepository.getAllHistory()
 
             println(historyList)

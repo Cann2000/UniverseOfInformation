@@ -89,6 +89,8 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
 
         job = viewModelScope.launch {
 
+            uploading.value = true
+
             val geographicEventList = geographicQueryRepository.getAllGeographicalEvent()
 
             if(!geographicEventList.isNullOrEmpty()){ // bu koşul eğer hiç internetten veri çekmeden ve sqle veri kaydetmeden sqlden veri çekmesini engeller

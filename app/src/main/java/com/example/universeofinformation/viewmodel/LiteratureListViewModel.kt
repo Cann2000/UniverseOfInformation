@@ -87,6 +87,8 @@ class LiteratureListViewModel@Inject constructor(private val apiRepository: APIR
 
         job = viewModelScope.launch {
 
+            uploading.value = true
+
             val literatureList = literatureQueryRepository.getAllLiterature()
 
             if(!literatureList.isNullOrEmpty()){
