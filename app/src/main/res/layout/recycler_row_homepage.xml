@@ -19,33 +19,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/menuImage"
-                android:layout_width="200dp"
-                android:layout_height="250dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:downloadImage="@{HomePageContent.imageUrl}"
-                app:srcCompat="@drawable/ic_launcher_background" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="wrap_content"
+                android:layout_height="275dp"
+                app:cardCornerRadius="22dp"
+                android:layout_margin="10dp"
+                app:cardElevation="16dp"
+                app:cardBackgroundColor="#86C3F4">
 
-            <TextView
-                android:id="@+id/menuName"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/menuImage"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="12dp"
-                android:text="@{HomePageContent.contentName}"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textStyle="bold">
+                <ImageView
+                    android:id="@+id/menuImage"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:downloadImage="@{HomePageContent.imageUrl}"
+                    app:srcCompat="@drawable/ic_launcher_background" />
 
-            </TextView>
+                <TextView
+                    android:id="@+id/menuName"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/menuImage"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="95dp"
+                    android:text="@{HomePageContent.contentName}"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold">
+
+                </TextView>
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
 

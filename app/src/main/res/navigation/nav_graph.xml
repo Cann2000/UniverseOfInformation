@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_homePageFragment_to_literatureListFragment"
             app:destination="@id/literatureListFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_countryListFragment"
+            app:destination="@id/countryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/geographicalEventsFragment"
@@ -71,6 +74,27 @@
         tools:layout="@layout/fragment_literature_details">
         <argument
             android:name="literatureId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/countryListFragment"
+        android:name="com.example.universeofinformation.view.CountryListFragment"
+        android:label="CountryListFragment"
+        tools:layout="@layout/fragment_country_list">
+        <action
+            android:id="@+id/action_countryListFragment_to_countryDetailsFragment"
+            app:destination="@id/countryDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countryDetailsFragment"
+        android:name="com.example.universeofinformation.view.CountryDetailsFragment"
+        android:label="CountryDetailsFragment"
+        tools:layout="@layout/fragment_country_details">
+        <action
+            android:id="@+id/action_countryDetailsFragment_to_countryListFragment"
+            app:destination="@id/countryListFragment" />
+        <argument
+            android:name="countryId"
             app:argType="integer" />
     </fragment>
 

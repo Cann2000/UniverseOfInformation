@@ -6,6 +6,8 @@ data class InfoData(
 
     val history_events: List<History>,
 
-    val  literary_works: List<Literature>
+    val  literary_works: List<Literature>,
+
+    val  turk_countries: List<Country>
 
     )

@@ -29,11 +29,13 @@ class HomePageViewModel:ViewModel() {
 
         val contentHistory = HomePageContent("Tarih","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToHistoryListFragment())
         val contentGeography = HomePageContent("Coğrafi Olaylar","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToGeographicalEventsFragment())
-        val contentUniverse = HomePageContent("Evren","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToLiteratureListFragment())
+        val contentLiterature = HomePageContent("Edebiyat","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToLiteratureListFragment())
+        val contentCountry = HomePageContent("Türk Devletleri","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToCountryListFragment())
 
         contentList.add(contentHistory)
         contentList.add(contentGeography)
-        contentList.add(contentUniverse)
+        contentList.add(contentLiterature)
+        contentList.add(contentCountry)
 
         homePageContent.value = contentList
 
