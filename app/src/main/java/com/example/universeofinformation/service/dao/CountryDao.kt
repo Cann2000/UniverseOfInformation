@@ -3,7 +3,9 @@ package com.example.universeofinformation.service.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.universeofinformation.model.Country
+import com.example.universeofinformation.model.GeographicEvent
 import com.example.universeofinformation.model.Literature
 
 @Dao
@@ -20,4 +22,7 @@ interface CountryDao {
 
     @Query("SELECT * FROM country")
     suspend fun getAllCountry(): List<Country>
+
+    @Update
+    suspend fun updateCountry(country: Country)
 }

@@ -26,7 +26,11 @@ data class GeographicEvent(
 
     @ColumnInfo(name = "ImageUrl")
     @SerializedName("ImageUrl")
-    val imageUrl:String
+    val imageUrl:String,
+
+    @ColumnInfo(name = "Starred")
+    var starred:Boolean = false
+
 ) {
 
     @PrimaryKey(autoGenerate = true)

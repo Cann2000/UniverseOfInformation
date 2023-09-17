@@ -17,12 +17,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.universeofinformation.R
 import com.example.universeofinformation.adapter.DataAdapter
 import com.example.universeofinformation.databinding.FragmentHistoryListBinding
+import com.example.universeofinformation.repository.GeographicQueryRepository
+import com.example.universeofinformation.repository.HistoryQueryRepository
 import com.example.universeofinformation.viewmodel.HistoryListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class HistoryListFragment : Fragment() {
+
+    @Inject
+    lateinit var historyListQueryRepository: HistoryQueryRepository
 
     private var _binding: FragmentHistoryListBinding? = null
     private val binding get() = _binding!!
@@ -79,6 +85,7 @@ class HistoryListFragment : Fragment() {
         binding.historyRecycler.layoutManager = LinearLayoutManager(requireView().context)
         binding.historyRecycler.setHasFixedSize(true)
 
+        adapter.historyQueryRepository = historyListQueryRepository
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             binding.errorText.visibility = View.GONE

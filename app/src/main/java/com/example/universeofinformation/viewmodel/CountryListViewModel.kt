@@ -29,6 +29,7 @@ class CountryListViewModel@Inject constructor(private val apiRepository: APIRepo
     val uploading = MutableLiveData<Boolean>()
 
     private lateinit var countryList:List<Country>
+    lateinit var adapter: DataAdapter
 
     private var job: Job? = null
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->

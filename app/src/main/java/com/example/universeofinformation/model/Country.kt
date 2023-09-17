@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity
-class Country(
+data class Country(
 
     @ColumnInfo(name = "CountryName")
     @SerializedName("name")
@@ -34,7 +34,10 @@ class Country(
 
     @ColumnInfo(name = "ImageUrl")
     @SerializedName("ImageUrl")
-    val imageUrl:String
+    val imageUrl:String,
+
+    @ColumnInfo(name = "Starred")
+    var starred:Boolean = false
 
     ) {
 

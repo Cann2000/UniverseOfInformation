@@ -1,5 +1,6 @@
 package com.example.universeofinformation.repository
 
+import com.example.universeofinformation.model.Favorite
 import com.example.universeofinformation.model.Literature
 import com.example.universeofinformation.service.dao.LiteratureDao
 import kotlinx.coroutines.CoroutineScope
@@ -8,7 +9,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class LiteratureQueryRepository@Inject constructor(private val literatureDao: LiteratureDao) {
+class LiteratureQueryRepository@Inject constructor(private val literatureDao: LiteratureDao,private val favoriteQueryRepository: FavoriteQueryRepository) {
 
     suspend fun insertAllLiterature(literatureList: List<Literature>){
 
@@ -44,6 +45,35 @@ class LiteratureQueryRepository@Inject constructor(private val literatureDao: Li
         return withContext(Dispatchers.IO){
 
             literatureDao.getAllLiterature()
+        }
+    }
+    suspend fun updateLiterature(uuid:Int, boolean: Boolean){
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            val literature = literatureDao.getLiterature(uuid)
+
+            literature?.let {
+
+                it.starred = boolean
+                literatureDao.updateLiterature(it)
+
+                if(boolean){
+
+                    val title = it.workName
+                    val subtitle = it.workType
+                    val imageUrl = it.imageUrl
+
+                    val favorite = Favorite(title,subtitle,imageUrl)
+
+                    favoriteQueryRepository.insertFavorite(favorite)
+                }
+                else{
+                    favoriteQueryRepository.deleteFavorites(it.workName!!)
+                }
+
+
+            }
         }
     }
 }

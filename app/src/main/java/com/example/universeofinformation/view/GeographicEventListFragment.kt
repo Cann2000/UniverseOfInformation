@@ -11,17 +11,24 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.universeofinformation.adapter.DataAdapter
 import com.example.universeofinformation.databinding.FragmentGeographicEventListBinding
+import com.example.universeofinformation.repository.FavoriteQueryRepository
+import com.example.universeofinformation.repository.GeographicQueryRepository
 import com.example.universeofinformation.viewmodel.GeographicEventListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class GeographicEventListFragment : Fragment() {
+
+    @Inject
+    lateinit var geographicQueryRepository: GeographicQueryRepository
 
     private var _binding: FragmentGeographicEventListBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var viewModel : GeographicEventListViewModel
     private val adapter = DataAdapter(arrayListOf())
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +49,8 @@ class GeographicEventListFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(GeographicEventListViewModel::class.java)
         viewModel.refreshData()
+
+        adapter.geographicQueryRepository = viewModel.geographicQueryRepository
 
         binding.geographicalEventsRecycler.adapter = adapter
         binding.geographicalEventsRecycler.layoutManager = LinearLayoutManager(requireView().context)

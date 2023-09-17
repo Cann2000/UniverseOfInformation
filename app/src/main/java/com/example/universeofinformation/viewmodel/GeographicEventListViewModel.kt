@@ -20,7 +20,7 @@ import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
-class GeographicEventListViewModel @Inject constructor(private val apiRepository: APIRepository, private val geographicQueryRepository: GeographicQueryRepository, private val sharedPreferencesRepository: SharedPreferencesRepository) :ViewModel() {
+class GeographicEventListViewModel @Inject constructor(private val apiRepository: APIRepository, val geographicQueryRepository: GeographicQueryRepository, private val sharedPreferencesRepository: SharedPreferencesRepository) :ViewModel() {
 
     val geographicalEvents = MutableLiveData<List<GeographicEvent>>()
     val errorMessage = MutableLiveData<Boolean>()

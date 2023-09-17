@@ -32,8 +32,7 @@
                     android:id="@+id/menuImage"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
-                    android:downloadImage="@{HomePageContent.imageUrl}"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    android:downloadImage="@{HomePageContent.imageUrl}" />
 
                 <TextView
                     android:id="@+id/menuName"

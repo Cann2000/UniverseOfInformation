@@ -30,7 +30,11 @@ data class History(
 
     @ColumnInfo(name = "ImageUrl")
     @SerializedName("ImageUrl")
-    val imageUrl:String?
+    val imageUrl:String?,
+
+    @ColumnInfo(name = "Starred")
+    var starred:Boolean = false
+
 ) {
     @PrimaryKey(autoGenerate = true)
     var uuid:Int? = 0

@@ -1,6 +1,7 @@
 package com.example.universeofinformation.repository
 
 import com.example.universeofinformation.model.Country
+import com.example.universeofinformation.model.Favorite
 import com.example.universeofinformation.model.GeographicEvent
 import com.example.universeofinformation.service.dao.CountryDao
 import kotlinx.coroutines.CoroutineScope
@@ -9,7 +10,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class CountryQueryRepository@Inject constructor(private val countryDao: CountryDao) {
+class CountryQueryRepository@Inject constructor(private val countryDao: CountryDao,private val favoriteQueryRepository: FavoriteQueryRepository) {
 
     suspend fun insertAllCountry(countryList:List<Country>) {
 
@@ -44,6 +45,36 @@ class CountryQueryRepository@Inject constructor(private val countryDao: CountryD
         return withContext(Dispatchers.IO){
 
             countryDao.getAllCountry()
+        }
+    }
+
+    suspend fun updateCountry(uuid:Int, boolean: Boolean){
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            val country = countryDao.getCountry(uuid)
+
+            country?.let {
+
+                it.starred = boolean
+                countryDao.updateCountry(it)
+
+                if(boolean){
+
+                    val title = it.countryName
+                    val subtitle = it.year
+                    val imageUrl = it.imageUrl
+
+                    val favorite = Favorite(title,subtitle,imageUrl)
+
+                    favoriteQueryRepository.insertFavorite(favorite)
+                }
+                else{
+                    favoriteQueryRepository.deleteFavorites(it.countryName!!)
+                }
+
+
+            }
         }
     }
 }

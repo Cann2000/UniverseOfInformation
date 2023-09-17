@@ -13,15 +13,22 @@ import com.example.universeofinformation.R
 import com.example.universeofinformation.adapter.DataAdapter
 import com.example.universeofinformation.databinding.FragmentCountryListBinding
 import com.example.universeofinformation.databinding.FragmentGeographicEventListBinding
+import com.example.universeofinformation.repository.CountryQueryRepository
+import com.example.universeofinformation.repository.GeographicQueryRepository
 import com.example.universeofinformation.viewmodel.CountryListViewModel
 import com.example.universeofinformation.viewmodel.GeographicEventListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CountryListFragment : Fragment() {
 
+    @Inject
+    lateinit var countryQueryRepository: CountryQueryRepository
+
     private var _binding: FragmentCountryListBinding? = null
     private val binding get() = _binding!!
+
 
     private lateinit var viewModel : CountryListViewModel
     private val adapter = DataAdapter(arrayListOf())
@@ -50,6 +57,8 @@ class CountryListFragment : Fragment() {
         binding.countryRecycler.adapter = adapter
         binding.countryRecycler.layoutManager = LinearLayoutManager(requireView().context)
         binding.countryRecycler.setHasFixedSize(true)
+
+        adapter.countryQueryRepository = countryQueryRepository
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             binding.errorText.visibility = View.GONE

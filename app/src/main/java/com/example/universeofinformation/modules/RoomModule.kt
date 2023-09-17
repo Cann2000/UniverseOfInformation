@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.universeofinformation.service.dao.HistoryDao
 import com.example.universeofinformation.service.Room_Database
 import com.example.universeofinformation.service.dao.CountryDao
+import com.example.universeofinformation.service.dao.FavoritesDao
 import com.example.universeofinformation.service.dao.GeographicEventDao
 import com.example.universeofinformation.service.dao.LiteratureDao
 import dagger.Module
@@ -46,5 +47,10 @@ class RoomModule {
     @Provides
     fun getCountryDao(database: Room_Database): CountryDao {
         return database.countryDao()
+    }
+    @Singleton
+    @Provides
+    fun getFavoritesDao(database: Room_Database): FavoritesDao {
+        return database.favoritesDao()
     }
 }

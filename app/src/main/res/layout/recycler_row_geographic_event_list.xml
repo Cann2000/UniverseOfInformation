@@ -45,8 +45,9 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="15dp">
-                </ImageView>
+                    android:layout_marginEnd="15dp"
+                    android:onClick="@{listener.starClicked}"
+                    app:srcCompat="@drawable/ic_launcher_background" />
 
             </RelativeLayout>
             <TextView

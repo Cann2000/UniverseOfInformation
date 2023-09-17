@@ -1,5 +1,6 @@
 package com.example.universeofinformation.repository
 
+import com.example.universeofinformation.model.Favorite
 import com.example.universeofinformation.model.History
 import com.example.universeofinformation.service.dao.HistoryDao
 import kotlinx.coroutines.CoroutineScope
@@ -8,7 +9,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class HistoryQueryRepository@Inject constructor(private val historyDao: HistoryDao) {
+class HistoryQueryRepository@Inject constructor(private val historyDao: HistoryDao,private val favoriteQueryRepository: FavoriteQueryRepository) {
 
 
     suspend fun insertAllHistory(historyList: List<History>) {
@@ -49,4 +50,33 @@ class HistoryQueryRepository@Inject constructor(private val historyDao: HistoryD
         }
     }
 
+    suspend fun updateHistory(uuid:Int, boolean: Boolean){
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            val history = historyDao.getHistory(uuid)
+
+            history?.let {
+
+                it.starred = boolean
+                historyDao.updateHistory(it)
+
+                if(boolean){
+
+                    val title = it.warName
+                    val subtitle = it.warHistory
+                    val imageUrl = it.imageUrl
+
+                    val favorite = Favorite(title,subtitle,imageUrl)
+
+                    favoriteQueryRepository.insertFavorite(favorite)
+                }
+                else{
+                    favoriteQueryRepository.deleteFavorites(it.warName!!)
+                }
+
+
+            }
+        }
+    }
 }

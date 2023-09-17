@@ -3,6 +3,7 @@ package com.example.universeofinformation.service.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.universeofinformation.model.GeographicEvent
 import com.example.universeofinformation.model.History
 
@@ -20,4 +21,7 @@ interface GeographicEventDao {
 
     @Query("SELECT * FROM geographicevent")
     suspend fun getAllGeographicEvent(): List<GeographicEvent>
+
+    @Update
+    suspend fun updateEvent(geographicEvent: GeographicEvent)
 }

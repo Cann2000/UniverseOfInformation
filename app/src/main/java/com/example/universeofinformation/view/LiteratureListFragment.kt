@@ -14,11 +14,17 @@ import com.example.universeofinformation.R
 import com.example.universeofinformation.adapter.DataAdapter
 import com.example.universeofinformation.databinding.FragmentHistoryListBinding
 import com.example.universeofinformation.databinding.FragmentLiteratureListBinding
+import com.example.universeofinformation.repository.GeographicQueryRepository
+import com.example.universeofinformation.repository.LiteratureQueryRepository
 import com.example.universeofinformation.viewmodel.LiteratureListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LiteratureListFragment : Fragment() {
+
+    @Inject
+    lateinit var literatureQueryRepository: LiteratureQueryRepository
 
     private var _binding: FragmentLiteratureListBinding? = null
     private val binding get() = _binding!!
@@ -49,6 +55,8 @@ class LiteratureListFragment : Fragment() {
         binding.literatureRecycler.adapter = adapter
         binding.literatureRecycler.layoutManager = LinearLayoutManager(requireView().context)
         binding.literatureRecycler.setHasFixedSize(true)
+
+        adapter.literatureQueryRepository = literatureQueryRepository
 
         binding.swipeRefreshLayout.setOnRefreshListener {
 

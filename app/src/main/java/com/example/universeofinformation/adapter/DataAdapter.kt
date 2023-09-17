@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.universeofinformation.R
@@ -17,19 +18,34 @@ import com.example.universeofinformation.model.Country
 import com.example.universeofinformation.model.GeographicEvent
 import com.example.universeofinformation.model.History
 import com.example.universeofinformation.model.Literature
+import com.example.universeofinformation.repository.CountryQueryRepository
+import com.example.universeofinformation.repository.GeographicQueryRepository
+import com.example.universeofinformation.repository.HistoryQueryRepository
+import com.example.universeofinformation.repository.LiteratureQueryRepository
 import com.example.universeofinformation.view.CountryListFragmentDirections
 import com.example.universeofinformation.view.GeographicEventListFragmentDirections
 import com.example.universeofinformation.view.HistoryListFragmentDirections
 import com.example.universeofinformation.view.LiteratureListFragmentDirections
+import com.example.universeofinformation.viewmodel.GeographicEventListViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    lateinit var historyQueryRepository: HistoryQueryRepository
+    lateinit var geographicQueryRepository: GeographicQueryRepository
+    lateinit var literatureQueryRepository: LiteratureQueryRepository
+    lateinit var countryQueryRepository: CountryQueryRepository
     private val HISTORY = 1
     private val GEOGRAPHICAL_EVENT = 2
     private val LITERATURE = 3
     private val COUNTRY = 4
 
-    class HistoryHolder(val binding: RecyclerRowHistoryListBinding): RecyclerView.ViewHolder(binding.root),ClickListener
+    class HistoryHolder(val binding: RecyclerRowHistoryListBinding, val historyQueryRepository: HistoryQueryRepository): RecyclerView.ViewHolder(binding.root),ClickListener
     {
         override fun dataClicked(view: View) {
 
@@ -44,10 +60,32 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
 
         override fun starClicked(view: View) {
             binding.starImage.setBackgroundColor(Color.YELLOW)
+
+            CoroutineScope(Dispatchers.Default).launch {
+
+                val historyUuid = binding.history?.uuid!!
+
+                historyUuid?.let {
+
+                    val historyStarred = historyQueryRepository.getHistory(it)
+
+                    historyStarred?.let {
+
+                        if(it.starred == true){
+
+                            historyQueryRepository.updateHistory(historyUuid!!,false)
+                        }
+                        else{
+                            historyQueryRepository.updateHistory(historyUuid!!,true)
+
+                        }
+                    }
+                }
+            }
         }
 
     }
-    class GeographicalEventHolder(val binding: RecyclerRowGeographicEventListBinding): RecyclerView.ViewHolder(binding.root),ClickListener{
+    class GeographicalEventHolder(val binding: RecyclerRowGeographicEventListBinding, val geographicQueryRepository: GeographicQueryRepository): RecyclerView.ViewHolder(binding.root),ClickListener{
 
         override fun dataClicked(view: View) {
 
@@ -61,12 +99,35 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
         }
 
         override fun starClicked(view: View) {
+
             binding.starImage.setBackgroundColor(Color.YELLOW)
+
+
+            CoroutineScope(Dispatchers.Default).launch {
+
+                val geographicEventUuid = binding.geographicEvent?.uuid!!
+
+                geographicEventUuid?.let {
+
+                    val geographicEventStarred = geographicQueryRepository.getGeographicEvent(it)
+
+                    geographicEventStarred?.let {
+
+                        if(it.starred == true){
+
+                            geographicQueryRepository.updateGeographicalEvent(geographicEventUuid!!,false)
+                        }
+                        else{
+                            geographicQueryRepository.updateGeographicalEvent(geographicEventUuid!!,true)
+                        }
+                    }
+                }
+            }
         }
 
     }
 
-    class LiteratureHolder(val binding: RecyclerRowLiteratureListBinding): RecyclerView.ViewHolder(binding.root),ClickListener{
+    class LiteratureHolder(val binding: RecyclerRowLiteratureListBinding, val literatureQueryRepository: LiteratureQueryRepository): RecyclerView.ViewHolder(binding.root),ClickListener{
 
         override fun dataClicked(view: View) {
 
@@ -81,10 +142,32 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
 
         override fun starClicked(view: View) {
             binding.starImage.setBackgroundColor(Color.YELLOW)
+
+            CoroutineScope(Dispatchers.Default).launch {
+
+                val literatureUuid = binding.literature?.uuid!!
+
+                literatureUuid?.let {
+
+                    val literatureStarred = literatureQueryRepository.getLiterature(it)
+
+                    literatureStarred?.let {
+
+                        if(it.starred == true){
+
+                            literatureQueryRepository.updateLiterature(literatureUuid!!,false)
+                        }
+                        else{
+                            literatureQueryRepository.updateLiterature(literatureUuid!!,true)
+
+                        }
+                    }
+                }
+            }
         }
 
     }
-    class CountryHolder(val binding: RecyclerRowCountryListBinding): RecyclerView.ViewHolder(binding.root),ClickListener{
+    class CountryHolder(val binding: RecyclerRowCountryListBinding, val countryQueryRepository: CountryQueryRepository): RecyclerView.ViewHolder(binding.root),ClickListener{
 
         override fun dataClicked(view: View) {
 
@@ -99,6 +182,28 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
 
         override fun starClicked(view: View) {
             binding.starImage.setBackgroundColor(Color.YELLOW)
+
+            CoroutineScope(Dispatchers.Default).launch {
+
+                val countryUuid = binding.country?.uuid!!
+
+                countryUuid?.let {
+
+                    val literatureStarred = countryQueryRepository.getCountry(it)
+
+                    literatureStarred?.let {
+
+                        if(it.starred == true){
+
+                            countryQueryRepository.updateCountry(countryUuid!!,false)
+                        }
+                        else{
+                            countryQueryRepository.updateCountry(countryUuid!!,true)
+
+                        }
+                    }
+                }
+            }
         }
 
     }
@@ -119,7 +224,7 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
                     false
                 )
 
-                HistoryHolder(binding)
+                HistoryHolder(binding,historyQueryRepository)
             }
             GEOGRAPHICAL_EVENT -> {
 
@@ -130,7 +235,7 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
                     false
                 )
 
-                GeographicalEventHolder(binding)
+                GeographicalEventHolder(binding,geographicQueryRepository)
             }
             LITERATURE -> {
                 binding = DataBindingUtil.inflate<RecyclerRowLiteratureListBinding>(
@@ -140,7 +245,7 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
                     false
                 )
 
-                LiteratureHolder(binding)
+                LiteratureHolder(binding,literatureQueryRepository)
             }
             COUNTRY -> {
                 binding = DataBindingUtil.inflate<RecyclerRowCountryListBinding>(
@@ -150,7 +255,7 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
                     false
                 )
 
-                CountryHolder(binding)
+                CountryHolder(binding,countryQueryRepository)
             }
             else -> throw IllegalArgumentException("Unknown viewType: $viewType")
         }
@@ -206,4 +311,5 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
         this.dataList  = dataList
         notifyDataSetChanged()
     }
+
 }

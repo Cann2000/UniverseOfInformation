@@ -3,6 +3,7 @@ package com.example.universeofinformation.service.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.universeofinformation.model.GeographicEvent
 import com.example.universeofinformation.model.Literature
 
@@ -20,4 +21,7 @@ interface LiteratureDao {
 
     @Query("SELECT * FROM literature")
     suspend fun getAllLiterature(): List<Literature>
+
+    @Update
+    suspend fun updateLiterature(literature: Literature)
 }
