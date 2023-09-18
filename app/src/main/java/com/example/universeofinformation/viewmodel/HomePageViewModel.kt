@@ -3,25 +3,31 @@ package com.example.universeofinformation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.universeofinformation.model.Favorite
 import com.example.universeofinformation.model.HomePageContent
+import com.example.universeofinformation.repository.FavoriteQueryRepository
 import com.example.universeofinformation.view.HomePageFragmentDirections
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class HomePageViewModel:ViewModel() {
+@HiltViewModel
+class HomePageViewModel@Inject constructor(private val favoriteQueryRepository: FavoriteQueryRepository):ViewModel() {
 
     val homePageContent = MutableLiveData<List<HomePageContent>>()
+    val favoriteList = MutableLiveData<List<Favorite>>()
 
     private var job: Job? = null
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         println(throwable.localizedMessage)
     }
 
-    fun getData(){
+    fun getContent(){
 
         val contentList = ArrayList<HomePageContent>()
 
@@ -39,6 +45,15 @@ class HomePageViewModel:ViewModel() {
 
         homePageContent.value = contentList
 
+    }
+
+    fun getFavorites(){
+
+        viewModelScope.launch {
+
+            val favorites = favoriteQueryRepository.getAllFavorites()
+            favoriteList.value = favorites
+        }
     }
 
     override fun onCleared() {

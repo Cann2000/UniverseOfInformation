@@ -11,10 +11,12 @@ import androidx.lifecycle.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.universeofinformation.R
+import com.example.universeofinformation.adapter.FavoriteListAdapter
 import com.example.universeofinformation.adapter.HomePageAdapter
 import com.example.universeofinformation.databinding.FragmentHistoryListBinding
 import com.example.universeofinformation.databinding.FragmentHomePageBinding
 import com.example.universeofinformation.viewmodel.HomePageViewModel
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +26,8 @@ class HomePageFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel:HomePageViewModel
-    private val adapter = HomePageAdapter(arrayListOf())
+    private val homePageAdapter = HomePageAdapter(arrayListOf())
+    private val favoriteListAdapter = FavoriteListAdapter(arrayListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,16 +46,18 @@ class HomePageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerViewContent.adapter= adapter
+        binding.recyclerViewContent.adapter= homePageAdapter
         binding.recyclerViewContent.layoutManager =  GridLayoutManager(requireView().context,2)
         binding.recyclerViewContent.setHasFixedSize(true)
 
+        binding.viewPager.adapter = favoriteListAdapter
+        TabLayoutMediator(binding.tabDots, binding.viewPager,true) { tab, position -> }.attach()
 
         viewModel = ViewModelProvider(this).get(HomePageViewModel::class.java)
-        viewModel.getData()
+        viewModel.getContent()
+        viewModel.getFavorites()
 
         observeLiveData()
-
     }
 
     override fun onDestroyView() {
@@ -65,7 +70,15 @@ class HomePageFragment : Fragment() {
         viewModel.homePageContent.observe(viewLifecycleOwner, Observer {
 
             it?.let {
-                adapter.adapterUpdate(it)
+                homePageAdapter.adapterUpdate(it)
+            }
+        })
+
+        viewModel.favoriteList.observe(viewLifecycleOwner, Observer {
+
+            it?.let {
+
+                favoriteListAdapter.dataListUpdate(it)
             }
         })
     }

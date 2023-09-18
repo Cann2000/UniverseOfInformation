@@ -8,16 +8,26 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content"
         android:minHeight="200dp">
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:orientation="vertical"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Favorilerim"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:textSize="20sp">
 
+            </TextView>
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -27,75 +37,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="156dp" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="140dp"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="22dp"
-                    app:cardElevation="16dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="140dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/historyRecyclerImageView"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_margin="3dp"
-                            android:layout_weight="2" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="2.5"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <ImageView
-                                    android:id="@+id/starImage"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_marginEnd="15dp"></ImageView>
-
-                            </RelativeLayout>
-
-                            <TextView
-                                android:id="@+id/warName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="8dp"
-                                android:textAlignment="center"
-                                android:textSize="16sp"
-                                android:textStyle="bold">
-
-                            </TextView>
-
-                            <TextView
-                                android:id="@+id/warHistory"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="8dp"
-                                android:textSize="16sp">
-
-                            </TextView>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
             </FrameLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabDots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="#D5D4D4"
+                app:tabBackground="@drawable/tab_selector"
+                app:tabGravity="center"
+                app:tabIndicatorHeight="0dp" />
+
 
         </LinearLayout>
 
@@ -114,13 +67,15 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"/>
+                android:layout_height="2dp"
+                android:background="@color/white" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewContent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="15dp" />
+                android:layout_margin="15dp"/>
+
 
         </LinearLayout>
 

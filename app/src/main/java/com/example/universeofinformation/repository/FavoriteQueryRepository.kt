@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class FavoriteQueryRepository@Inject constructor(private val favoritesDao: FavoritesDao) {
+class   FavoriteQueryRepository@Inject constructor(private val favoritesDao: FavoritesDao) {
 
     suspend fun insertFavorite(favorite:Favorite) {
 
