@@ -19,6 +19,9 @@ interface GeographicEventDao {
     @Query("SELECT * FROM geographicevent WHERE uuid = :geographicId")
     suspend fun getGeographicEvent(geographicId:Int): GeographicEvent
 
+    @Query("SELECT * FROM geographicevent WHERE starred = :starred")
+    suspend fun getStarredGeographicEvent(starred:Boolean): List<GeographicEvent>
+
     @Query("SELECT * FROM geographicevent")
     suspend fun getAllGeographicEvent(): List<GeographicEvent>
 

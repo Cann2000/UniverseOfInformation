@@ -1,5 +1,6 @@
 package com.example.universeofinformation.repository
 
+import androidx.recyclerview.widget.DiffUtil
 import com.example.universeofinformation.model.Favorite
 import com.example.universeofinformation.model.History
 import com.example.universeofinformation.service.dao.HistoryDao
@@ -16,11 +17,23 @@ class HistoryQueryRepository@Inject constructor(private val historyDao: HistoryD
 
         CoroutineScope(Dispatchers.IO).launch{
 
+            val starredHistoryList = historyDao.getStarredHistory(true)
+
             historyDao.deleteAll()
 
             val uuid = historyDao.insertAll(*historyList.toTypedArray())
             historyList.forEachIndexed { index, history ->
                 history.uuid = uuid[index].toInt()
+
+                for(starredList in starredHistoryList){
+
+                    if(starredList.warName == history.warName){
+                        history.starred = true
+                        historyDao.updateHistory(history)
+                        println(history)
+
+                    }
+                }
             }
         }
 
@@ -38,6 +51,15 @@ class HistoryQueryRepository@Inject constructor(private val historyDao: HistoryD
 
         return withContext(Dispatchers.IO){
             historyDao.getHistory(uuid)
+        }
+
+    }
+
+    suspend fun getStarredHistory(starred:Boolean): List<History> {
+
+        return withContext(Dispatchers.IO){
+
+            historyDao.getStarredHistory(starred)
         }
 
     }

@@ -47,7 +47,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="15dp"
                     android:onClick="@{listener.starClicked}"
-                    app:srcCompat="@drawable/ic_launcher_background" >
+                    android:starState="@{history.starred}">
                 </ImageView>
 
             </RelativeLayout>

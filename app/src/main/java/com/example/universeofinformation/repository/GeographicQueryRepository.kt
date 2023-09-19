@@ -17,11 +17,22 @@ class GeographicQueryRepository@Inject constructor(private val geographicEventDa
 
         CoroutineScope(Dispatchers.IO).launch {
 
+            val starredGeographicEventList = geographicEventDao.getStarredGeographicEvent(true)
+
             geographicEventDao.deleteAll()
 
             val uuid = geographicEventDao.insertAll(*geographicEventList.toTypedArray())
             geographicEventList.forEachIndexed{index, geographicEvent ->
                 geographicEvent.uuid = uuid[index].toInt()
+
+                for(starredList in starredGeographicEventList){
+
+                    if(starredList.eventName == geographicEvent.eventName){
+                        println(geographicEvent)
+                        geographicEvent.starred = true
+                        geographicEventDao.updateEvent(geographicEvent)
+                    }
+                }
             }
         }
     }

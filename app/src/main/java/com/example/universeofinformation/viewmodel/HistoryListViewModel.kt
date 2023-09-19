@@ -16,6 +16,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -75,24 +76,26 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
 
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
 
-            val response = apiRepository.getData()
 
-            if(response.isSuccessful)
-            {
-                val history = response.body()?.history_events
-
-                history?.let {
-
-                    saveToSql(it)
-
-                    withContext(Dispatchers.Main) {
-                        showHistory(it)
-                    }
-                }
+            val deferredResponse = async {
+                apiRepository.getData() // İşlemi başlatır ve Deferred<Response> olarak döner
             }
 
+            try {
+                val response = deferredResponse.await() // İşlem bitene kadar bekler
+                if (response.isSuccessful) {
+                    val history = response.body()?.history_events
+                    history?.let {
+                        saveToSql(it)
+                        withContext(Dispatchers.Main) {
+                            showHistory(it)
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                // Hata işleme kodunu burada ekleyin
+            }
         }
-
     }
     private fun getDataFromSql() {
 

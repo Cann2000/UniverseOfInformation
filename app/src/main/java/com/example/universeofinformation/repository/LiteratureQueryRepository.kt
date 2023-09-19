@@ -15,12 +15,22 @@ class LiteratureQueryRepository@Inject constructor(private val literatureDao: Li
 
         CoroutineScope(Dispatchers.IO).launch {
 
+            val starredGeographicEventList = literatureDao.getStarredLiterature(true)
+
             literatureDao.deleteAll()
 
             val uuid = literatureDao.insertAll(*literatureList.toTypedArray())
             literatureList.forEachIndexed { index, literature ->
-
                 literature.uuid = uuid[index].toInt()
+
+                for(starredList in starredGeographicEventList){
+
+                    if(starredList.workName == literature.workName){
+                        println(literature)
+                        literature.starred = true
+                        literatureDao.updateLiterature(literature)
+                    }
+                }
             }
         }
     }

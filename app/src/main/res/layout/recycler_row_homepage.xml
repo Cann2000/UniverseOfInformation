@@ -32,7 +32,7 @@
                     android:id="@+id/menuImage"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
-                    android:downloadImage="@{HomePageContent.imageUrl}" />
+                    android:downloadImage="@{HomePageContent.imageUrl}"/>
 
                 <TextView
                     android:id="@+id/menuName"

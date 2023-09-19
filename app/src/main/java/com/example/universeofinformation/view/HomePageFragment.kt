@@ -15,6 +15,7 @@ import com.example.universeofinformation.adapter.FavoriteListAdapter
 import com.example.universeofinformation.adapter.HomePageAdapter
 import com.example.universeofinformation.databinding.FragmentHistoryListBinding
 import com.example.universeofinformation.databinding.FragmentHomePageBinding
+import com.example.universeofinformation.utility.autoScroll
 import com.example.universeofinformation.viewmodel.HomePageViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,8 +51,11 @@ class HomePageFragment : Fragment() {
         binding.recyclerViewContent.layoutManager =  GridLayoutManager(requireView().context,2)
         binding.recyclerViewContent.setHasFixedSize(true)
 
+        //viewPager
         binding.viewPager.adapter = favoriteListAdapter
         TabLayoutMediator(binding.tabDots, binding.viewPager,true) { tab, position -> }.attach()
+        binding.viewPager.autoScroll(10000)
+
 
         viewModel = ViewModelProvider(this).get(HomePageViewModel::class.java)
         viewModel.getContent()

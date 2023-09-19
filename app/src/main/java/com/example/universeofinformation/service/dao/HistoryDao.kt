@@ -19,6 +19,9 @@ interface HistoryDao {
     @Query("SELECT * FROM history WHERE uuid = :historyId")
     suspend fun getHistory(historyId:Int): History
 
+    @Query("SELECT * FROM history WHERE starred = :starred")
+    suspend fun getStarredHistory(starred:Boolean): List<History>
+
     @Query("SELECT * FROM history")
     suspend fun getAllHistory(): List<History>
 
