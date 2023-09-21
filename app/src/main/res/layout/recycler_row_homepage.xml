@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="10dp">
 
 
         <RelativeLayout
@@ -22,16 +22,16 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
                 android:layout_width="wrap_content"
-                android:layout_height="275dp"
+                android:layout_height="250dp"
                 app:cardCornerRadius="22dp"
                 android:layout_margin="10dp"
                 app:cardElevation="16dp"
-                app:cardBackgroundColor="#86C3F4">
+                app:cardBackgroundColor="#CCD6DD">
 
                 <ImageView
                     android:id="@+id/menuImage"
                     android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_height="185dp"
                     android:downloadImage="@{HomePageContent.imageUrl}"/>
 
                 <TextView

@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -65,9 +66,10 @@ class HistoryListFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when (menuItem.itemId){
-                    R.id.favorites -> {
-                        //val action= HistoryListFragmentDirections.actionHistoryListFragmentToHistoryDetailsFragment()
-                        //Navigation.findNavController(requireView()).navigate(action)
+                    R.id.themeMode -> {
+
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
                         return true
                     }
                 }
@@ -100,11 +102,14 @@ class HistoryListFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 binding.searchView.clearFocus()
+
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+
                 viewModel.searchViewFilterList(newText,adapter)
+
                 return true
             }
 
@@ -121,9 +126,11 @@ class HistoryListFragment : Fragment() {
 
     fun observeLiveData() {
 
+
         viewModel.history.observe(viewLifecycleOwner, Observer {
 
             it?.let {
+
                 binding.historyRecycler.visibility = View.VISIBLE
                 adapter.dataListUpdate(it)
             }
@@ -137,6 +144,7 @@ class HistoryListFragment : Fragment() {
                     binding.historyRecycler.visibility = View.GONE
                     binding.errorText.visibility = View.VISIBLE
                 } else {
+                    binding.searchView.setQuery("", false)
                     binding.errorText.visibility = View.INVISIBLE
                 }
             }

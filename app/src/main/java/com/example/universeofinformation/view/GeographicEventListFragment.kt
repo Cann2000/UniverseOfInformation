@@ -103,6 +103,7 @@ class GeographicEventListFragment : Fragment() {
                     binding.geographicalEventsRecycler.visibility = View.GONE
                     binding.errorText.visibility = View.VISIBLE
                 } else {
+                    binding.searchView.setQuery("", false)
                     binding.errorText.visibility = View.INVISIBLE
                 }
             }

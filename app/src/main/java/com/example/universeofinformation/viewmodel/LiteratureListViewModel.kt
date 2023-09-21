@@ -15,6 +15,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Locale
@@ -67,18 +68,27 @@ class LiteratureListViewModel@Inject constructor(private val apiRepository: APIR
 
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
 
-            val response = apiRepository.getData()
+            try {
 
-            val literaryWorks = response.body()?.literary_works
+                val response = apiRepository.getData()
 
-            literaryWorks?.let {
+                val literaryWorks = response.body()?.literary_works
 
-                saveToSql(it)
+                literaryWorks?.let {
 
-                withContext(Dispatchers.Main){
+                    saveToSql(it).apply {
 
-                    showLiteraryWorks(it)
+                        withContext(Dispatchers.Main){
+
+                            delay(100)
+                            showLiteraryWorks(it)
+                        }
+                    }
                 }
+            }
+            catch (e:Exception){
+
+                e.printStackTrace()
             }
         }
     }

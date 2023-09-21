@@ -33,10 +33,10 @@ class HomePageViewModel@Inject constructor(private val favoriteQueryRepository: 
 
         contentList.clear()
 
-        val contentHistory = HomePageContent("Tarih","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToHistoryListFragment())
-        val contentGeography = HomePageContent("Coğrafi Olaylar","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToGeographicalEventsFragment())
-        val contentLiterature = HomePageContent("Edebiyat","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToLiteratureListFragment())
-        val contentCountry = HomePageContent("Türk Devletleri","https://raw.githubusercontent.com/Cann2000/HistoryBookData/main/a.jpg",HomePageFragmentDirections.actionHomePageFragmentToCountryListFragment())
+        val contentHistory = HomePageContent("Tarih","https://raw.githubusercontent.com/Cann2000/UniverseOfInformationData/main/PicturesContent/Tarih.jpg",HomePageFragmentDirections.actionHomePageFragmentToHistoryListFragment())
+        val contentGeography = HomePageContent("Coğrafi Olaylar","https://raw.githubusercontent.com/Cann2000/UniverseOfInformationData/main/PicturesContent/Cografya.jpg",HomePageFragmentDirections.actionHomePageFragmentToGeographicalEventsFragment())
+        val contentLiterature = HomePageContent("Edebiyat","https://raw.githubusercontent.com/Cann2000/UniverseOfInformationData/main/PicturesContent/Edebiyat.jpg",HomePageFragmentDirections.actionHomePageFragmentToLiteratureListFragment())
+        val contentCountry = HomePageContent("Türk Devletleri","https://raw.githubusercontent.com/Cann2000/UniverseOfInformationData/main/PicturesContent/TurkDevletleri.png",HomePageFragmentDirections.actionHomePageFragmentToCountryListFragment())
 
         contentList.add(contentHistory)
         contentList.add(contentGeography)

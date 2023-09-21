@@ -76,24 +76,27 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
 
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
 
-
-            val deferredResponse = async {
-                apiRepository.getData() // İşlemi başlatır ve Deferred<Response> olarak döner
-            }
-
             try {
-                val response = deferredResponse.await() // İşlem bitene kadar bekler
+
+                val response = apiRepository.getData()
+
                 if (response.isSuccessful) {
                     val history = response.body()?.history_events
                     history?.let {
-                        saveToSql(it)
-                        withContext(Dispatchers.Main) {
-                            showHistory(it)
+
+                        saveToSql(it).apply {
+
+                            withContext(Dispatchers.Main) {
+
+                                delay(100)
+                                showHistory(it)
+                            }
                         }
                     }
                 }
             } catch (e: Exception) {
-                // Hata işleme kodunu burada ekleyin
+
+                e.printStackTrace()
             }
         }
     }

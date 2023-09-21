@@ -108,6 +108,7 @@ class CountryListFragment : Fragment() {
                     binding.countryRecycler.visibility = View.GONE
                     binding.errorText.visibility = View.VISIBLE
                 } else {
+                    binding.searchView.setQuery("", false)
                     binding.errorText.visibility = View.INVISIBLE
                 }
             }

@@ -14,6 +14,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Locale
@@ -67,21 +68,29 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
 
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
 
-            val response = apiRepository.getData()
+            try {
 
-            if (response.isSuccessful) {
+                val response = apiRepository.getData()
 
-                val geographicalEvents = response.body()?.geographical_events
+                if (response.isSuccessful) {
 
-                geographicalEvents?.let {
+                    val geographicalEvents = response.body()?.geographical_events
 
-                    saveToSql(it)
+                    geographicalEvents?.let {
 
-                    withContext(Dispatchers.Main){
+                        saveToSql(it).apply {
 
-                        showGeographicalEvents(it)
+                            withContext(Dispatchers.Main){
+
+                                delay(100)
+                                showGeographicalEvents(it)
+                            }
+                        }
                     }
                 }
+            }
+            catch (e:Exception){
+                e.printStackTrace()
             }
         }
     }

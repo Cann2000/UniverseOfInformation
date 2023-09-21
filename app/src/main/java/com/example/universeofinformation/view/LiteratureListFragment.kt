@@ -99,6 +99,7 @@ class LiteratureListFragment : Fragment() {
                     binding.literatureRecycler.visibility = View.GONE
                     binding.errorText.visibility = View.VISIBLE
                 } else {
+                    binding.searchView.setQuery("", false)
                     binding.errorText.visibility = View.INVISIBLE
                 }
             }
