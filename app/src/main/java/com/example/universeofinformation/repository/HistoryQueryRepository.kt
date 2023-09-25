@@ -26,12 +26,15 @@ class HistoryQueryRepository@Inject constructor(private val historyDao: HistoryD
             historyList.forEachIndexed { index, history ->
                 history.uuid = uuid[index].toInt()
 
-                for(starredList in starredHistoryList){
+                starredHistoryList.isNotEmpty().let {
 
-                    if(starredList.warName == history.warName){
-                        history.starred = true
-                        historyDao.updateHistory(history)
+                    for(starredList in starredHistoryList){
 
+                        if(starredList.warName == history.warName){
+                            history.starred = true
+                            historyDao.updateHistory(history)
+
+                        }
                     }
                 }
             }

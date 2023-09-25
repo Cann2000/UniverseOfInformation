@@ -10,96 +10,101 @@
             type="com.example.universeofinformation.model.Literature" />
     </data>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.LiteratureDetailsFragment">
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/literatureImageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:minHeight="200dp"
-            android:scaleType="fitCenter"
-            android:downloadImage="@{selectedLiterature.imageUrl}">
-
-        </ImageView>
-
-        <TextView
-            android:id="@+id/workName"
-            android:layout_below="@+id/literatureImageView"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:text="@{selectedLiterature.workName}"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="8dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".view.LiteratureDetailsFragment">
 
-        </TextView>
+            <ImageView
+                android:id="@+id/literatureImageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:minHeight="200dp"
+                android:scaleType="fitCenter"
+                android:downloadImage="@{selectedLiterature.imageUrl}">
 
-        <TextView
-            android:id="@+id/author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/workName"
-            android:textAlignment="center"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@{selectedLiterature.author}"
-            android:textSize="20sp">
+            </ImageView>
 
-        </TextView>
+            <TextView
+                android:id="@+id/workName"
+                android:layout_below="@+id/literatureImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="@{selectedLiterature.workName}"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp">
 
-        <TextView
-            android:id="@+id/workType"
-            android:layout_below="@+id/author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@{selectedLiterature.workType}"
-            android:textSize="18sp"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="15dp">
+            </TextView>
 
-        </TextView>
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/workName"
+                android:textAlignment="center"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="8dp"
+                android:text="@{selectedLiterature.author}"
+                android:textSize="20sp">
 
-        <TextView
-            android:id="@+id/summary"
-            android:layout_below="@+id/workType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@{selectedLiterature.summary}"
-            android:textSize="20sp"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="8dp">
+            </TextView>
 
-        </TextView>
+            <TextView
+                android:id="@+id/workType"
+                android:layout_below="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@{selectedLiterature.workType}"
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp">
 
-        <TextView
-            android:id="@+id/period"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/summary"
-            android:textAlignment="center"
-            android:text="@{selectedLiterature.period}"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:textSize="18sp">
+            </TextView>
 
-        </TextView>
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/summary"
+                android:layout_below="@+id/workType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_margin="24dp"
+                android:text="@{selectedLiterature.summary}"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/summary"
+                android:textAlignment="center"
+                android:text="@{selectedLiterature.period}"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:textSize="18sp">
+
+            </TextView>
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

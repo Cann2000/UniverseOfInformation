@@ -10,81 +10,92 @@
             type="com.example.universeofinformation.model.GeographicEvent" />
     </data>
 
-    <RelativeLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.GeographicEventDetailsFragment">
+        android:orientation="vertical" >
 
-        <ImageView
-            android:id="@+id/geographicEventImageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:minHeight="200dp"
-            android:scaleType="fitCenter"
-            android:downloadImage="@{selectedGeographicEvent.imageUrl}">
-
-        </ImageView>
-
-        <TextView
-            android:id="@+id/geographicEventName"
-            android:layout_below="@+id/geographicEventImageView"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:text="@{selectedGeographicEvent.eventName}"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="20dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".view.GeographicEventDetailsFragment">
 
-        </TextView>
+            <ImageView
+                android:id="@+id/geographicEventImageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:minHeight="200dp"
+                android:scaleType="fitCenter"
+                android:downloadImage="@{selectedGeographicEvent.imageUrl}">
 
-        <TextView
-            android:id="@+id/geographicalEventDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/geographicEventName"
-            android:textAlignment="center"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@{selectedGeographicEvent.eventDate}"
-            android:textSize="18sp">
+            </ImageView>
 
-        </TextView>
+            <TextView
+                android:id="@+id/geographicEventName"
+                android:layout_below="@+id/geographicEventImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="@{selectedGeographicEvent.eventName}"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp">
 
-        <TextView
-            android:id="@+id/geographicEventInformation"
-            android:layout_below="@+id/geographicalEventDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@{selectedGeographicEvent.eventInformation}"
-            android:textSize="18sp"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="15dp">
+            </TextView>
 
-        </TextView>
+            <TextView
+                android:id="@+id/geographicalEventDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/geographicEventName"
+                android:textAlignment="center"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@{selectedGeographicEvent.eventDate}"
+                android:textSize="18sp">
 
-        <TextView
-            android:id="@+id/geographicEventLocation"
-            android:layout_below="@+id/geographicEventInformation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@{selectedGeographicEvent.eventLocation}"
-            android:textSize="18sp"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="8dp">
+            </TextView>
 
-        </TextView>
+            <TextView
+                android:id="@+id/geographicEventInformation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/geographicalEventDate"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="24dp"
+                android:text="@{selectedGeographicEvent.eventInformation}"
+                android:textAlignment="center"
+                android:textSize="18sp">
 
-    </RelativeLayout>
+            </TextView>
+
+            <TextView
+                android:id="@+id/geographicEventLocation"
+                android:layout_below="@+id/geographicEventInformation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@{selectedGeographicEvent.eventLocation}"
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="8dp">
+
+            </TextView>
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

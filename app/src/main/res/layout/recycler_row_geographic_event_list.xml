@@ -62,6 +62,15 @@
 
             </TextView>
 
+            <TextView
+                android:id="@+id/countryYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@{geographicEvent.eventDate}"
+                android:layout_margin="8dp">
+
+            </TextView>
 
         </LinearLayout>
 

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import com.example.universeofinformation.databinding.FragmentCountryListBinding
 import com.example.universeofinformation.databinding.FragmentGeographicEventListBinding
 import com.example.universeofinformation.repository.CountryQueryRepository
 import com.example.universeofinformation.repository.GeographicQueryRepository
+import com.example.universeofinformation.utility.Constants
 import com.example.universeofinformation.viewmodel.CountryListViewModel
 import com.example.universeofinformation.viewmodel.GeographicEventListViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +38,12 @@ class CountryListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val isConnectedToNetwork = Constants.isNetworkAvailable(requireContext())
+
+        if(!isConnectedToNetwork){
+
+            Toast.makeText(requireContext(), "You don't have internet access", Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onCreateView(
@@ -46,6 +54,7 @@ class CountryListFragment : Fragment() {
         _binding = FragmentCountryListBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

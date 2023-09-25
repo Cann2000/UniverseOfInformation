@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,6 +17,7 @@ import com.example.universeofinformation.databinding.FragmentHistoryListBinding
 import com.example.universeofinformation.databinding.FragmentLiteratureListBinding
 import com.example.universeofinformation.repository.GeographicQueryRepository
 import com.example.universeofinformation.repository.LiteratureQueryRepository
+import com.example.universeofinformation.utility.Constants
 import com.example.universeofinformation.viewmodel.LiteratureListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -34,6 +36,13 @@ class LiteratureListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val isConnectedToNetwork = Constants.isNetworkAvailable(requireContext())
+
+        if(!isConnectedToNetwork){
+
+            Toast.makeText(requireContext(), "You don't have internet access", Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onCreateView(

@@ -1,14 +1,26 @@
 package com.example.universeofinformation.view
 
+import android.content.Context
+import android.graphics.Point
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.net.NetworkInfo
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.Log
+import android.view.Display
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -20,6 +32,7 @@ import com.example.universeofinformation.adapter.DataAdapter
 import com.example.universeofinformation.databinding.FragmentHistoryListBinding
 import com.example.universeofinformation.repository.GeographicQueryRepository
 import com.example.universeofinformation.repository.HistoryQueryRepository
+import com.example.universeofinformation.utility.Constants
 import com.example.universeofinformation.viewmodel.HistoryListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -31,6 +44,8 @@ class HistoryListFragment : Fragment() {
     @Inject
     lateinit var historyListQueryRepository: HistoryQueryRepository
 
+    private lateinit var permissionLauncher: ActivityResultLauncher<String>
+
     private var _binding: FragmentHistoryListBinding? = null
     private val binding get() = _binding!!
 
@@ -40,8 +55,14 @@ class HistoryListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
 
+        val isConnectedToNetwork = Constants.isNetworkAvailable(requireContext())
+
+        if(!isConnectedToNetwork){
+
+            Toast.makeText(requireContext(), "You don't have internet access", Toast.LENGTH_LONG).show()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +79,7 @@ class HistoryListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        /*
         (requireActivity() as MenuHost).addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu,menu)
@@ -79,6 +100,7 @@ class HistoryListFragment : Fragment() {
 
         },viewLifecycleOwner)
 
+         */
 
         viewModel = ViewModelProvider(this).get(HistoryListViewModel::class.java)
         viewModel.refreshData()

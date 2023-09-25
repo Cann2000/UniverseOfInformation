@@ -23,12 +23,15 @@ class LiteratureQueryRepository@Inject constructor(private val literatureDao: Li
             literatureList.forEachIndexed { index, literature ->
                 literature.uuid = uuid[index].toInt()
 
-                for(starredList in starredGeographicEventList){
+                starredGeographicEventList.isNotEmpty().let {
 
-                    if(starredList.workName == literature.workName){
-                        println(literature)
-                        literature.starred = true
-                        literatureDao.updateLiterature(literature)
+                    for(starredList in starredGeographicEventList){
+
+                        if(starredList.workName == literature.workName){
+                            println(literature)
+                            literature.starred = true
+                            literatureDao.updateLiterature(literature)
+                        }
                     }
                 }
             }

@@ -25,12 +25,15 @@ class GeographicQueryRepository@Inject constructor(private val geographicEventDa
             geographicEventList.forEachIndexed{index, geographicEvent ->
                 geographicEvent.uuid = uuid[index].toInt()
 
-                for(starredList in starredGeographicEventList){
+                starredGeographicEventList.isNotEmpty().let {
 
-                    if(starredList.eventName == geographicEvent.eventName){
-                        println(geographicEvent)
-                        geographicEvent.starred = true
-                        geographicEventDao.updateEvent(geographicEvent)
+                    for(starredList in starredGeographicEventList){
+
+                        if(starredList.eventName == geographicEvent.eventName){
+                            println(geographicEvent)
+                            geographicEvent.starred = true
+                            geographicEventDao.updateEvent(geographicEvent)
+                        }
                     }
                 }
             }

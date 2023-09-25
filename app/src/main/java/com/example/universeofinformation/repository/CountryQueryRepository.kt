@@ -24,12 +24,15 @@ class CountryQueryRepository@Inject constructor(private val countryDao: CountryD
             countryList.forEachIndexed { index, country ->
                 country.uuid = uuid[index].toInt()
 
-                for(starredList in starredCountryList){
+                starredCountryList.isNotEmpty().let {
 
-                    if(starredList.countryName == country.countryName){
-                        println(country)
-                        country.starred = true
-                        countryDao.updateCountry(country)
+                    for(starredList in starredCountryList){
+
+                        if(starredList.countryName == country.countryName){
+                            println(country)
+                            country.starred = true
+                            countryDao.updateCountry(country)
+                        }
                     }
                 }
             }

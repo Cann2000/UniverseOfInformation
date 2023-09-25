@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
@@ -15,6 +16,7 @@ import com.example.universeofinformation.adapter.FavoriteListAdapter
 import com.example.universeofinformation.adapter.HomePageAdapter
 import com.example.universeofinformation.databinding.FragmentHistoryListBinding
 import com.example.universeofinformation.databinding.FragmentHomePageBinding
+import com.example.universeofinformation.utility.Constants
 import com.example.universeofinformation.utility.autoScroll
 import com.example.universeofinformation.viewmodel.HomePageViewModel
 import com.google.android.material.tabs.TabLayoutMediator
@@ -32,6 +34,13 @@ class HomePageFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val isConnectedToNetwork = Constants.isNetworkAvailable(requireContext())
+
+        if(!isConnectedToNetwork){
+
+            Toast.makeText(requireContext(), "You don't have internet access", Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onCreateView(
