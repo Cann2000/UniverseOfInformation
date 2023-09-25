@@ -9,11 +9,8 @@ import com.example.universeofinformation.repository.FavoriteQueryRepository
 import com.example.universeofinformation.view.HomePageFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -42,6 +39,7 @@ class HomePageViewModel@Inject constructor(private val favoriteQueryRepository: 
         contentList.add(contentGeography)
         contentList.add(contentCountry)
         contentList.add(contentLiterature)
+
         homePageContent.value = contentList
 
     }

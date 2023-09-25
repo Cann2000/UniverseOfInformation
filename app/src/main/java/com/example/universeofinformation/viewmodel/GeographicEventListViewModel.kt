@@ -42,10 +42,10 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
         if (saveTime != null && saveTime != 0L && System.nanoTime() - saveTime < updateTime){ // updateTime in Constants
             //Sqlite'tan çek
             getDataFromSql()
-            println("sql")
+
         } else {
+
             getDataFromInternet()
-            println("internet")
         }
     }
 
@@ -131,13 +131,12 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
 
                 val filteredList = ArrayList<Any>()
 
-
                 if(geographicEventList != null){
 
                     geographicEventList.forEach {
 
                         val geographicEventName = it.eventName?.lowercase(Locale.ROOT)
-                        if(geographicEventName?.startsWith(query) == true){
+                        if(geographicEventName?.startsWith(query.lowercase(Locale.ROOT)) == true){
 
                             filteredList.add(it)
                         }

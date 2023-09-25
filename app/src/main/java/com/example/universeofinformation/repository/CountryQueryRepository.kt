@@ -2,7 +2,6 @@ package com.example.universeofinformation.repository
 
 import com.example.universeofinformation.model.Country
 import com.example.universeofinformation.model.Favorite
-import com.example.universeofinformation.model.GeographicEvent
 import com.example.universeofinformation.service.dao.CountryDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

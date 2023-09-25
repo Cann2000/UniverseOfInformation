@@ -1,6 +1,5 @@
 package com.example.universeofinformation.repository
 
-import com.example.universeofinformation.model.History
 import com.example.universeofinformation.model.InfoData
 import com.example.universeofinformation.service.DataAPI
 import retrofit2.Response

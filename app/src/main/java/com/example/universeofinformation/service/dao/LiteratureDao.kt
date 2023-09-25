@@ -4,8 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.universeofinformation.model.GeographicEvent
-import com.example.universeofinformation.model.History
 import com.example.universeofinformation.model.Literature
 
 @Dao

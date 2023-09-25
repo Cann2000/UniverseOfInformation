@@ -7,7 +7,6 @@ import com.example.universeofinformation.adapter.ClickListener
 import com.example.universeofinformation.databinding.RecyclerRowGeographicEventListBinding
 import com.example.universeofinformation.repository.GeographicQueryRepository
 import com.example.universeofinformation.utility.starClickedUtil
-import com.example.universeofinformation.utility.toggleStarredState
 import com.example.universeofinformation.view.GeographicEventListFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

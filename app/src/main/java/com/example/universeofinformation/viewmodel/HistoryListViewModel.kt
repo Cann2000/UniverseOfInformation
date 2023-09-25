@@ -1,6 +1,5 @@
 package com.example.universeofinformation.viewmodel
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,16 +9,13 @@ import com.example.universeofinformation.repository.APIRepository
 import com.example.universeofinformation.repository.HistoryQueryRepository
 import com.example.universeofinformation.repository.SharedPreferencesRepository
 import com.example.universeofinformation.utility.Constants.updateTime
-import com.example.universeofinformation.utility.HiddenSharedPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.util.Locale
 import javax.inject.Inject
@@ -49,10 +45,10 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
         if (saveTime != null && saveTime != 0L && System.nanoTime() - saveTime < updateTime ){ // updateTime in Constants
             //Sqlite'tan çek
             getDataFromSql()
-            println("sql")
+
         } else {
             getDataFromInternet()
-            println("internet")
+
         }
     }
 
@@ -70,8 +66,6 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
     }
     private fun getDataFromInternet()
     {
-        println("internet2")
-
         uploading.value = true
 
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
@@ -108,7 +102,6 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
 
             val historyList = historyQueryRepository.getAllHistory()
 
-            println(historyList)
             if(!historyList.isNullOrEmpty()) // bu koşul eğer hiç internetten veri çekmeden ve sqle veri kaydetmeden sqlden veri çekmesini engeller
             {
                 withContext(Dispatchers.Main)
@@ -142,18 +135,15 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
                     historyList.forEach {
 
                         val warName = it.warName?.lowercase(Locale.ROOT)
-                        if (warName?.startsWith(query) == true) {
-                            filteredList.add(it)
+                        if (warName?.startsWith(query.lowercase(Locale.ROOT)) == true) {
 
-                            println("a")
+                            filteredList.add(it)
                         }
                         else {
 
                             withContext(Dispatchers.Main)
                             {
                                 adapter.setFilteredList(filteredList)
-                                println("b")
-
                             }
                         }
                     }

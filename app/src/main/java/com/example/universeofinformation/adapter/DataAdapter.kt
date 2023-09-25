@@ -1,13 +1,10 @@
 package com.example.universeofinformation.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.navigation.Navigation
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.universeofinformation.R
 import com.example.universeofinformation.adapter.Holders.CountryHolder
@@ -26,15 +23,9 @@ import com.example.universeofinformation.repository.CountryQueryRepository
 import com.example.universeofinformation.repository.GeographicQueryRepository
 import com.example.universeofinformation.repository.HistoryQueryRepository
 import com.example.universeofinformation.repository.LiteratureQueryRepository
-import com.example.universeofinformation.utility.toggleStarredState
-import com.example.universeofinformation.view.CountryListFragmentDirections
-import com.example.universeofinformation.view.GeographicEventListFragmentDirections
-import com.example.universeofinformation.view.LiteratureListFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -164,18 +155,7 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
         this.dataList  = dataList
         notifyDataSetChanged()
     }
-
-    private fun toggleStarredState(starred:Boolean, imageView: ImageView) {
-
-        CoroutineScope(Dispatchers.Main).launch{
-            if (starred) {
-                imageView.setImageResource(R.drawable.starred)
-            } else {
-                imageView.setImageResource(R.drawable.not_starred)
-            }
-        }
-    }
-
+    
 }
 
 

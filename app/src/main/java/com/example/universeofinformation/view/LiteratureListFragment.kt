@@ -9,13 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.universeofinformation.R
 import com.example.universeofinformation.adapter.DataAdapter
-import com.example.universeofinformation.databinding.FragmentHistoryListBinding
 import com.example.universeofinformation.databinding.FragmentLiteratureListBinding
-import com.example.universeofinformation.repository.GeographicQueryRepository
 import com.example.universeofinformation.repository.LiteratureQueryRepository
 import com.example.universeofinformation.utility.Constants
 import com.example.universeofinformation.viewmodel.LiteratureListViewModel

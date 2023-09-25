@@ -5,10 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.universeofinformation.adapter.DataAdapter
 import com.example.universeofinformation.model.Country
-import com.example.universeofinformation.model.GeographicEvent
 import com.example.universeofinformation.repository.APIRepository
 import com.example.universeofinformation.repository.CountryQueryRepository
-import com.example.universeofinformation.repository.GeographicQueryRepository
 import com.example.universeofinformation.repository.SharedPreferencesRepository
 import com.example.universeofinformation.utility.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -45,10 +43,10 @@ class CountryListViewModel@Inject constructor(private val apiRepository: APIRepo
         if (saveTime != null && saveTime != 0L && System.nanoTime() - saveTime < Constants.updateTime){ // updateTime in Constants
             //Sqlite'tan çek
             getDataFromSql()
-            println("sql")
+
         } else {
+
             getDataFromInternet()
-            println("internet")
         }
     }
 
@@ -141,7 +139,7 @@ class CountryListViewModel@Inject constructor(private val apiRepository: APIRepo
                     countryList.forEach {
 
                         val geographicEventName = it.countryName?.lowercase(Locale.ROOT)
-                        if(geographicEventName?.startsWith(query) == true){
+                        if(geographicEventName?.startsWith(query.lowercase(Locale.ROOT)) == true){
 
                             filteredList.add(it)
                         }

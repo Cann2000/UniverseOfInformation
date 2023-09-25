@@ -3,7 +3,6 @@ package com.example.universeofinformation.utility
 import android.content.Context
 import android.os.Handler
 import android.widget.ImageView
-import androidx.databinding.Bindable
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import androidx.viewpager2.widget.ViewPager2
@@ -13,7 +12,6 @@ import com.example.universeofinformation.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 fun ImageView.uploadImage(url:String?, placeholder: CircularProgressDrawable)
 {

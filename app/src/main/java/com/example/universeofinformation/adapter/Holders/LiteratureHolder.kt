@@ -7,7 +7,6 @@ import com.example.universeofinformation.adapter.ClickListener
 import com.example.universeofinformation.databinding.RecyclerRowLiteratureListBinding
 import com.example.universeofinformation.repository.LiteratureQueryRepository
 import com.example.universeofinformation.utility.starClickedUtil
-import com.example.universeofinformation.utility.toggleStarredState
 import com.example.universeofinformation.view.LiteratureListFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

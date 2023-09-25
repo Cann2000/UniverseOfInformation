@@ -9,10 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.universeofinformation.R
-import com.example.universeofinformation.databinding.FragmentHistoryDetailsBinding
 import com.example.universeofinformation.databinding.FragmentLiteratureDetailsBinding
-import com.example.universeofinformation.viewmodel.GeographicEventDetailsViewModel
-import com.example.universeofinformation.viewmodel.HistoryDetailsViewModel
 import com.example.universeofinformation.viewmodel.LiteratureDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

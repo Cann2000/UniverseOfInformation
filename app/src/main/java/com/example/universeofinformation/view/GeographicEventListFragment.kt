@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.universeofinformation.adapter.DataAdapter
 import com.example.universeofinformation.databinding.FragmentGeographicEventListBinding
-import com.example.universeofinformation.repository.FavoriteQueryRepository
 import com.example.universeofinformation.repository.GeographicQueryRepository
 import com.example.universeofinformation.utility.Constants
 import com.example.universeofinformation.viewmodel.GeographicEventListViewModel

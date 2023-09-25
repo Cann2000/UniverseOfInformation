@@ -7,7 +7,6 @@ import com.example.universeofinformation.adapter.ClickListener
 import com.example.universeofinformation.databinding.RecyclerRowCountryListBinding
 import com.example.universeofinformation.repository.CountryQueryRepository
 import com.example.universeofinformation.utility.starClickedUtil
-import com.example.universeofinformation.utility.toggleStarredState
 import com.example.universeofinformation.view.CountryListFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

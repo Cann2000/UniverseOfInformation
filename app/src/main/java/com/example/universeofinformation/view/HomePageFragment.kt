@@ -8,13 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.universeofinformation.R
 import com.example.universeofinformation.adapter.FavoriteListAdapter
 import com.example.universeofinformation.adapter.HomePageAdapter
-import com.example.universeofinformation.databinding.FragmentHistoryListBinding
 import com.example.universeofinformation.databinding.FragmentHomePageBinding
 import com.example.universeofinformation.utility.Constants
 import com.example.universeofinformation.utility.autoScroll

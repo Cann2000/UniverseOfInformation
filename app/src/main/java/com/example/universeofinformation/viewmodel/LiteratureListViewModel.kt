@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.universeofinformation.adapter.DataAdapter
-import com.example.universeofinformation.model.GeographicEvent
 import com.example.universeofinformation.model.Literature
 import com.example.universeofinformation.repository.APIRepository
 import com.example.universeofinformation.repository.LiteratureQueryRepository
@@ -42,10 +41,10 @@ class LiteratureListViewModel@Inject constructor(private val apiRepository: APIR
         if (saveTime != null && saveTime != 0L && System.nanoTime() - saveTime < Constants.updateTime){ // updateTime in Constants
             //Sqlite'tan çek
             getDataFromSql()
-            println("sql")
+
         } else {
+
             getDataFromInternet()
-            println("internet")
         }
     }
 
@@ -136,7 +135,7 @@ class LiteratureListViewModel@Inject constructor(private val apiRepository: APIR
                     literatureList.forEach {
 
                         val geographicEventName = it.workName?.lowercase(Locale.ROOT)
-                        if(geographicEventName?.startsWith(query) == true){
+                        if(geographicEventName?.startsWith(query.lowercase(Locale.ROOT)) == true){
 
                             filteredList.add(it)
                         }

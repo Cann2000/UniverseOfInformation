@@ -1,13 +1,11 @@
 package com.example.universeofinformation.repository
 
-import androidx.recyclerview.widget.DiffUtil
 import com.example.universeofinformation.model.Favorite
 import com.example.universeofinformation.model.History
 import com.example.universeofinformation.service.dao.HistoryDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 

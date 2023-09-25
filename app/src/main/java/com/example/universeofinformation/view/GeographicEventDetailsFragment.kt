@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.example.universeofinformation.R
 import com.example.universeofinformation.databinding.FragmentGeographicEventDetailsBinding
-import com.example.universeofinformation.databinding.FragmentHistoryDetailsBinding
 import com.example.universeofinformation.viewmodel.GeographicEventDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

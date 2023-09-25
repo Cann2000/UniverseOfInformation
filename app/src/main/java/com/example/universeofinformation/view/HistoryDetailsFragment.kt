@@ -12,7 +12,6 @@ import com.example.universeofinformation.R
 import com.example.universeofinformation.databinding.FragmentHistoryDetailsBinding
 import com.example.universeofinformation.viewmodel.HistoryDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @AndroidEntryPoint
 class HistoryDetailsFragment : Fragment() {
