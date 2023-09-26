@@ -155,7 +155,7 @@ class DataAdapter(var dataList:ArrayList<Any>): RecyclerView.Adapter<RecyclerVie
         this.dataList  = dataList
         notifyDataSetChanged()
     }
-    
+
 }
 
 
