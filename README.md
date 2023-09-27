@@ -1,6 +1,6 @@
 # UniverseOfInformation
 
-Merhaba Kotlin ile yapmış olduğum uygulamamın amacı farklı özelliklerdeki konularda çeşitli bilgilere ulaşmak. istediğiniz konudaki bilgileri okuyup favorilerinize ekleyebilirsiniz ve istedğiniz veriyi arayabilirzsiniz.
+Merhaba Kotlin ile yapmış olduğum uygulamamın amacı farklı özelliklerdeki konularda çeşitli bilgilere ulaşmak. istediğiniz konudaki bilgileri okuyup favorilerinize ekleyebilirsiniz ve istedğiniz veriyi arayabilirsiniz.
 dilerseniz uygulamamı play store'dan indirebilirsiniz -> https://play.google.com/store/apps/details?id=com.canyldz.universeofinformation
 
 # Teknik Özellikler
