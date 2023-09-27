@@ -14,7 +14,6 @@ Uygulamamı geliştirirken Mvvm yapısına ve modern android geliştiriciliğine
 - Data Binding
 - LiveData
 - ViewModel
-  
 - Third party
-    -Glide
-    -Retrofit
+  -Glide
+  -Retrofit
