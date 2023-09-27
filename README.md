@@ -4,8 +4,8 @@ Merhaba Kotlin ile yapmış olduğum uygulamamın amacı farklı özelliklerdeki
 dilerseniz uygulamamı play store'dan indirebilirsiniz -> https://play.google.com/store/apps/details?id=com.canyldz.universeofinformation
 
 # Teknik Özellikler
-Uygulamamda internetten veri çekerek kullanıyorum.Daha sonra aldığım verileri veri tabanıma kaydediyorum. her 30 dk'de bir verileri tekrar internetten çekerek yeni veri eklenmişsse veya veri güncellemesi yapılmışsa bu değişiklilerin kullanıcıya tekrar ulaşmasını istiyorum.
-Uygulamamı geliştirirken Mvvm yapısına ve modern android geliştiriciliğine uygun bir yapıda geliştirdim kullandığım kütüphaneler ve özellikler şu şekilde
+Uygulamamda verileri internetten çekiyorum.Daha sonra aldığım verileri veri tabanıma kaydediyorum. Her 30 dk'de bir verileri tekrar internetten çekerek yeni veri eklenmişsse veya veri güncellemesi yapılmışsa bu değişiklilerin kullanıcıya tekrar ulaşmasını sağlıyorum.
+Uygulamamı geliştirirken Mvvm yapısına ve modern android geliştiriciliğine uygun bir yapıda geliştirmeye çalıştım. Kullandığım kütüphaneler ve özellikler şu şekilde
 
 - Dependency injection-Hilt
 - Navigation Component
