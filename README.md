@@ -1,6 +1,6 @@
 # UniverseOfInformation
 
-Merhaba Kotlin ile yapmış olduğum uygulamamın amacı farklı özelliklerdeki konularda çeşitli bilgilere ulaşmak. istediğiniz konudaki bilgileri okuyup favorilerinize ekleyebilirsiniz.
+Merhaba Kotlin ile yapmış olduğum uygulamamın amacı farklı özelliklerdeki konularda çeşitli bilgilere ulaşmak. istediğiniz konudaki bilgileri okuyup favorilerinize ekleyebilirsiniz ve istedğiniz veriyi arayabilirzsiniz.
 dilerseniz uygulamamı play store'dan indirebilirsiniz -> https://play.google.com/store/apps/details?id=com.canyldz.universeofinformation
 
 # Teknik Özellikler
@@ -10,10 +10,9 @@ Uygulamamı geliştirirken Mvvm yapısına ve modern android geliştiriciliğine
 - Dependency injection-Hilt
 - Navigation Component
 - Coroutines
+- Retrofit
 - Room
 - Data Binding
 - LiveData
 - ViewModel
-- Third party
-  -Glide
-  -Retrofit
+- Glide
