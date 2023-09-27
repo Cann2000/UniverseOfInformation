@@ -19,7 +19,7 @@ Uygulamamı geliştirirken Mvvm yapısına ve modern android geliştiriciliğine
 
 # Uygulama içeriği
 ![1](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/827084b0-4673-4b7c-b9f0-3ee0226943b9)
-![2](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/903916e0-f4d1-4f83-9d08-0a802f409d38)
+![2](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/c07aa35f-2e30-40f0-90c0-881b7b981985)
 ![3](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/e8e04f2f-c847-4012-bde5-fa894393a9cd)
 
 ![4](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/c056a0cc-9dce-4dd6-bb3c-2a2ebe79e47b)
