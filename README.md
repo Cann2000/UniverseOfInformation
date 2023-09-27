@@ -15,5 +15,5 @@ Uygulamamı geliştirirken Mvvm yapısına ve modern android geliştiriciliğine
 - LiveData
 - ViewModel
 - Third party
-  -Glide
-  -Retrofit
+    -Glide
+    -Retrofit
