@@ -17,7 +17,7 @@ In my application, I pull data from the internet. Then I save the data I obtain 
 - ViewModel
 - Glide
 - 
-# used api  
+# Used API  
 https://raw.githubusercontent.com/Cann2000/UniverseOfInformationData/main/Data.json
 
 # Application content
