@@ -1,11 +1,11 @@
 # UniverseOfInformation
 
-Merhaba Kotlin ile yapmış olduğum uygulamamın amacı farklı özelliklerdeki konularda çeşitli bilgilere ulaşmak. istediğiniz konudaki bilgileri okuyup favorilerinize ekleyebilirsiniz ve istedğiniz veriyi arayabilirsiniz.
-dilerseniz uygulamamı play store'dan indirebilirsiniz -> https://play.google.com/store/apps/details?id=com.canyldz.universeofinformation
+Hello, the purpose of my application, which I made with Kotlin, is to access various information on subjects with different features. You can read information on any subject you want, add it to your favorites, and search for the data you want. If you wish, you can download my application from play store -> https://play.google.com/store/apps/details?id=com.canyldz.universeofinformation
 
-# Teknik Özellikler
-Uygulamamda verileri internetten çekiyorum.Daha sonra aldığım verileri veri tabanıma kaydediyorum. Her 30 dk'de bir verileri tekrar internetten çekerek yeni veri eklenmişsse veya veri güncellemesi yapılmışsa bu değişiklilerin kullanıcıya tekrar ulaşmasını sağlıyorum.
-Uygulamamı geliştirirken Mvvm yapısına ve modern android geliştiriciliğine uygun bir yapıda geliştirmeye çalıştım. Kullandığım kütüphaneler ve özellikler şu şekilde
+
+# Technicial Specifications
+In my application, I pull the data from the internet. Then I save the data I get to my database. I pull the data back from the internet every 30 minutes to ensure that if new data is added or data updated, these changes reach the user again.
+While developing my application, I tried to develop it in a structure suitable for Mvvm structure and modern Android development. The libraries and features I use are as follows:
 
 - Dependency injection-Hilt
 - Navigation Component
@@ -17,7 +17,7 @@ Uygulamamı geliştirirken Mvvm yapısına ve modern android geliştiriciliğine
 - ViewModel
 - Glide
 
-# Uygulama içeriği
+# Application content
 ![1](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/1ff1b44d-7a9d-466c-a552-6e93a81c97e8)
 ![2](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/1261d47c-d6a8-4143-bfba-003834bac8e2)
 ![3](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/a3424c6e-8a98-4611-bc65-c78afced7b1c)
