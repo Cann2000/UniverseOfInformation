@@ -11,7 +11,7 @@ android {
     compileSdk 34
 
     defaultConfig {
-        applicationId 'com.canyldz.universeofinformation'
+        applicationId 'com.example.universeofinformation'
         minSdk 24
         targetSdk 34
         versionCode 1
@@ -101,9 +101,6 @@ dependencies {
 
     implementation("androidx.room:room-rxjava3:2.5.2")
 
-    //Paging
-    def paging_version = "3.1.1"
-    implementation "androidx.paging:paging-runtime:$paging_version"
 
     //Hilt
     implementation 'com.google.dagger:hilt-android:2.48'
