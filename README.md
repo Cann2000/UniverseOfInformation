@@ -18,13 +18,13 @@ Uygulamamı geliştirirken Mvvm yapısına ve modern android geliştiriciliğine
 - Glide
 
 # Uygulama içeriği
-![1](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/827084b0-4673-4b7c-b9f0-3ee0226943b9)
-![2](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/c07aa35f-2e30-40f0-90c0-881b7b981985)
-![3](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/e8e04f2f-c847-4012-bde5-fa894393a9cd)
+![1](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/1ff1b44d-7a9d-466c-a552-6e93a81c97e8)
+![2](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/1261d47c-d6a8-4143-bfba-003834bac8e2)
+![3](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/a3424c6e-8a98-4611-bc65-c78afced7b1c)
 
-![4](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/c056a0cc-9dce-4dd6-bb3c-2a2ebe79e47b)
-![5](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/eeb217d7-ec64-47b8-bc11-72b634f7ed93)
-![6](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/34c604d2-0943-4966-8d57-50f5d51d52b1)
+![4](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/64c64961-8f82-402d-b0f9-523a2262750b)
+![5](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/8f05c6a2-ed28-4159-ba38-9e63d8855035)
+![6](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/f2bad813-67a2-43e6-b0ff-69c68ec76afb)
 
-![7](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/0fa26e74-6a75-4c51-870f-c8d6596d60c0)
-![8](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/6caf7b3c-9bd8-4727-96d8-f89da49f1eb4)
+![7](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/fbbad1b6-7dcb-4d2a-b553-4e5319bf01c8)
+![8](https://github.com/Cann2000/UniverseOfInformation/assets/94134588/d7dc5109-d828-4575-b72e-af877df3fdda)
