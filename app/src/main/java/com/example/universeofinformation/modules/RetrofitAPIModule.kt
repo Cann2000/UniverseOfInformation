@@ -20,7 +20,6 @@ class RetrofitAPIModule {
     fun getRetrofit():Retrofit{
         return Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
     }
 
