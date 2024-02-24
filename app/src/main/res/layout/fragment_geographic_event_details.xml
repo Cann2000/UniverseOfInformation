@@ -44,7 +44,7 @@
                 android:layout_below="@+id/geographicEventImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="@dimen/maximum_text_detail_size"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:text="@{selectedGeographicEvent.eventName}"
@@ -65,7 +65,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="@{selectedGeographicEvent.eventDate}"
-                android:textSize="18sp">
+                android:textSize="@dimen/minimum_text_detail_size">
 
             </TextView>
 
@@ -78,7 +78,7 @@
                 android:layout_margin="24dp"
                 android:text="@{selectedGeographicEvent.eventInformation}"
                 android:textAlignment="center"
-                android:textSize="18sp">
+                android:textSize="@dimen/minimum_text_detail_size">
 
             </TextView>
 
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:text="@{selectedGeographicEvent.eventLocation}"
-                android:textSize="18sp"
+                android:textSize="@dimen/minimum_text_detail_size"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="8dp">
 

@@ -59,7 +59,7 @@ class HomePageFragment : Fragment() {
         //viewPager
         binding.viewPager.adapter = favoriteListAdapter
         TabLayoutMediator(binding.tabDots, binding.viewPager,true) { tab, position -> }.attach()
-        binding.viewPager.autoScroll(10000)
+        //binding.viewPager.autoScroll(10000)
 
 
         viewModel = ViewModelProvider(this).get(HomePageViewModel::class.java)

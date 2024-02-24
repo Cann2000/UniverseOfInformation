@@ -12,8 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HistoryHolder(val binding: RecyclerRowHistoryListBinding, val historyQueryRepository: HistoryQueryRepository): RecyclerView.ViewHolder(binding.root),
-    ClickListener
+class HistoryHolder(val binding: RecyclerRowHistoryListBinding, val historyQueryRepository: HistoryQueryRepository): RecyclerView.ViewHolder(binding.root), ClickListener
 {
 
     override fun dataClicked(view: View) {

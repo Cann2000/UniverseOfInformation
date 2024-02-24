@@ -47,7 +47,7 @@
                 android:layout_margin="8dp"
                 android:text="@{selectedHistory.warName}"
                 android:textAlignment="center"
-                android:textSize="20sp"
+                android:textSize="@dimen/maximum_text_detail_size"
                 android:textStyle="bold">
 
             </TextView>
@@ -64,7 +64,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="@{selectedHistory.warHistory}"
                 android:textAlignment="center"
-                android:textSize="18sp">
+                android:textSize="@dimen/minimum_text_detail_size">
 
             </TextView>
 
@@ -74,10 +74,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/warHistory"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
                 android:text="@{selectedHistory.warInformation}"
                 android:textAlignment="center"
-                android:textSize="18sp">
+                android:textSize="@dimen/minimum_text_detail_size">
 
             </TextView>
 
@@ -90,7 +93,7 @@
                 android:layout_margin="8dp"
                 android:text="@{selectedHistory.countries}"
                 android:textAlignment="center"
-                android:textSize="18sp">
+                android:textSize="@dimen/minimum_text_detail_size">
 
             </TextView>
 
@@ -106,7 +109,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="@{selectedHistory.winner}"
                 android:textAlignment="center"
-                android:textSize="20sp">
+                android:textSize="@dimen/maximum_text_detail_size">
 
             </TextView>
         </RelativeLayout>

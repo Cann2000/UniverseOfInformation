@@ -16,3 +16,5 @@ class SharedPreferencesRepository @Inject constructor(private val sharedPreferen
     }
     fun takeTime() = sharedPreferences?.getLong(Constants.TIME,0)
 }
+
+

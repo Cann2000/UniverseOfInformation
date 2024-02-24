@@ -55,7 +55,7 @@
                 android:id="@+id/countryName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="@dimen/recycler_row_text_size"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:text="@{country.countryName}"
@@ -67,7 +67,7 @@
                 android:id="@+id/countryYear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="@dimen/recycler_row_text_size"
                 android:text="@{country.year}"
                 android:layout_margin="8dp">
 

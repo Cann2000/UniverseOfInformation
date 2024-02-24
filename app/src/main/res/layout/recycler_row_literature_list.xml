@@ -55,7 +55,7 @@
                 android:id="@+id/literatureWorkName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="@dimen/recycler_row_text_size"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:text="@{literature.workName}"
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:text="@{literature.author}"
-                android:layout_margin="8dp">
+                android:layout_margin="@dimen/recycler_row_text_size">
 
             </TextView>
 

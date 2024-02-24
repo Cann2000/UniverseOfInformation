@@ -21,7 +21,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="250dp"
                 app:cardCornerRadius="22dp"
                 android:layout_margin="10dp"
@@ -45,7 +45,7 @@
                     android:layout_marginTop="95dp"
                     android:text="@{HomePageContent.contentName}"
                     android:textAlignment="center"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/recycler_row_homepage_text_size"
                     android:textStyle="bold">
 
                 </TextView>
