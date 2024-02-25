@@ -1,4 +1,4 @@
-package com.example.universeofinformation.viewmodel
+package com.example.universeofinformation.viewmodel.geographic
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

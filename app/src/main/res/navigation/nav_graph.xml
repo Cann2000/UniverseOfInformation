@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/historyListFragment"
-        android:name="com.example.universeofinformation.view.HistoryListFragment"
+        android:name="com.example.universeofinformation.view.history.HistoryListFragment"
         android:label="HistoryListFragment"
         tools:layout="@layout/fragment_history_list">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/historyDetailsFragment"
-        android:name="com.example.universeofinformation.view.HistoryDetailsFragment"
+        android:name="com.example.universeofinformation.view.history.HistoryDetailsFragment"
         android:label="HistoryDetailsFragment"
         tools:layout="@layout/fragment_history_details">
         <argument
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/homePageFragment"
-        android:name="com.example.universeofinformation.view.HomePageFragment"
+        android:name="com.example.universeofinformation.view.homepage.HomePageFragment"
         android:label="fragment_home_page"
         tools:layout="@layout/fragment_home_page" >
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/geographicalEventsFragment"
-        android:name="com.example.universeofinformation.view.GeographicEventListFragment"
+        android:name="com.example.universeofinformation.view.geographic.GeographicEventListFragment"
         android:label="fragment_geographical_events"
         tools:layout="@layout/fragment_geographic_event_list" >
         <action
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/geographicEventDetailsFragment"
-        android:name="com.example.universeofinformation.view.GeographicEventDetailsFragment"
+        android:name="com.example.universeofinformation.view.geographic.GeographicEventDetailsFragment"
         android:label="GeographicEventDetailsFragment"
         tools:layout="@layout/fragment_geographic_event_details" >
         <argument android:name="geographicEventId"
@@ -60,7 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/literatureListFragment"
-        android:name="com.example.universeofinformation.view.LiteratureListFragment"
+        android:name="com.example.universeofinformation.view.literature.LiteratureListFragment"
         android:label="LiteratureListFragment"
         tools:layout="@layout/fragment_literature_list" >
         <action
@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/literatureDetailsFragment"
-        android:name="com.example.universeofinformation.view.LiteratureDetailsFragment"
+        android:name="com.example.universeofinformation.view.literature.LiteratureDetailsFragment"
         android:label="LiteratureDetailsFragment"
         tools:layout="@layout/fragment_literature_details">
         <argument
@@ -78,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/countryListFragment"
-        android:name="com.example.universeofinformation.view.CountryListFragment"
+        android:name="com.example.universeofinformation.view.country.CountryListFragment"
         android:label="CountryListFragment"
         tools:layout="@layout/fragment_country_list">
         <action
@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/countryDetailsFragment"
-        android:name="com.example.universeofinformation.view.CountryDetailsFragment"
+        android:name="com.example.universeofinformation.view.country.CountryDetailsFragment"
         android:label="CountryDetailsFragment"
         tools:layout="@layout/fragment_country_details">
         <action

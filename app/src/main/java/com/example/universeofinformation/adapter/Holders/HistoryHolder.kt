@@ -3,16 +3,17 @@ package com.example.universeofinformation.adapter.Holders
 import android.view.View
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.example.universeofinformation.adapter.ClickListener
+import com.example.universeofinformation.utility.ClickListener
 import com.example.universeofinformation.databinding.RecyclerRowHistoryListBinding
 import com.example.universeofinformation.repository.HistoryQueryRepository
 import com.example.universeofinformation.utility.starClickedUtil
-import com.example.universeofinformation.view.HistoryListFragmentDirections
+import com.example.universeofinformation.view.history.HistoryListFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HistoryHolder(val binding: RecyclerRowHistoryListBinding, val historyQueryRepository: HistoryQueryRepository): RecyclerView.ViewHolder(binding.root), ClickListener
+class HistoryHolder(val binding: RecyclerRowHistoryListBinding, val historyQueryRepository: HistoryQueryRepository): RecyclerView.ViewHolder(binding.root),
+    ClickListener
 {
 
     override fun dataClicked(view: View) {

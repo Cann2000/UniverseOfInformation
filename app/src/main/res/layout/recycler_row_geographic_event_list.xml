@@ -8,7 +8,7 @@
             type="com.example.universeofinformation.model.GeographicEvent" />
         <variable
             name="listener"
-            type="com.example.universeofinformation.adapter.ClickListener"/>
+            type="com.example.universeofinformation.utility.ClickListener"/>
 
     </data>
 

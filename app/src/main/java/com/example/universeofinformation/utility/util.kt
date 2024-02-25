@@ -1,6 +1,7 @@
 package com.example.universeofinformation.utility
 
 import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Handler
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -84,4 +85,11 @@ fun ImageView.starClickedUtil(starredState:Boolean){
             this@starClickedUtil.setImageResource(R.drawable.not_starred)
         }
     }
+}
+
+fun isNetworkAvailable(context: Context): Boolean {
+    val service = Context.CONNECTIVITY_SERVICE
+    val manager = context.getSystemService(service) as ConnectivityManager?
+    val network = manager?.activeNetworkInfo
+    return (network != null)
 }

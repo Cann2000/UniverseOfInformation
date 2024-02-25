@@ -1,4 +1,4 @@
-package com.example.universeofinformation.viewmodel
+package com.example.universeofinformation.viewmodel.literature
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,7 +21,7 @@ import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
-class LiteratureListViewModel@Inject constructor(private val apiRepository: APIRepository, private val literatureQueryRepository: LiteratureQueryRepository, private val sharedPreferencesRepository: SharedPreferencesRepository):ViewModel() {
+class LiteratureListViewModel@Inject constructor(private val apiRepository: APIRepository, private val literatureQueryRepository: LiteratureQueryRepository):ViewModel() {
 
     val literature = MutableLiveData<List<Literature>>()
     val errorMessage = MutableLiveData<Boolean>()
@@ -36,29 +36,19 @@ class LiteratureListViewModel@Inject constructor(private val apiRepository: APIR
 
     fun refreshData(){
 
-        val saveTime = sharedPreferencesRepository.takeTime()
+        if (Constants.loadLiterature){
 
-        if (saveTime != null && saveTime != 0L && System.nanoTime() - saveTime < Constants.updateTime){ // updateTime in Constants
-            //Sqlite'tan çek
-            getDataFromSql()
+            getDataFromInternet()
 
         } else {
 
-            getDataFromInternet()
+            getDataFromSql()
         }
     }
 
     fun refreshInternet(){
 
         getDataFromInternet()
-    }
-
-    fun showLiteraryWorks(literatureList:List<Literature>){
-
-        literature.value = literatureList
-        this.literatureList = literatureList
-        errorMessage.value = false
-        uploading.value = false
     }
 
     private fun getDataFromInternet(){
@@ -78,6 +68,8 @@ class LiteratureListViewModel@Inject constructor(private val apiRepository: APIR
                     saveToSql(it).apply {
 
                         withContext(Dispatchers.Main){
+
+                            Constants.loadLiterature = false
 
                             delay(100)
                             showLiteraryWorks(it)
@@ -116,8 +108,6 @@ class LiteratureListViewModel@Inject constructor(private val apiRepository: APIR
     private suspend fun saveToSql(literatureList: List<Literature>){
 
         literatureQueryRepository.insertAllLiterature(literatureList)
-
-        sharedPreferencesRepository.saveTime(System.nanoTime())
 
     }
 
@@ -159,6 +149,14 @@ class LiteratureListViewModel@Inject constructor(private val apiRepository: APIR
                 }
             }
         }
+    }
+
+    private fun showLiteraryWorks(literatureList:List<Literature>){
+
+        literature.value = literatureList
+        this.literatureList = literatureList
+        errorMessage.value = false
+        uploading.value = false
     }
 
     override fun onCleared() {

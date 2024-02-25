@@ -1,4 +1,4 @@
-package com.example.universeofinformation.view
+package com.example.universeofinformation.view.literature
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,14 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.universeofinformation.R
 import com.example.universeofinformation.databinding.FragmentLiteratureDetailsBinding
-import com.example.universeofinformation.viewmodel.LiteratureDetailsViewModel
+import com.example.universeofinformation.viewmodel.literature.LiteratureDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LiteratureDetailsFragment : Fragment() {
 
-    private var _dataBinding: FragmentLiteratureDetailsBinding? = null
-    private val dataBinding get() = _dataBinding!!
+    private var _binding: FragmentLiteratureDetailsBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: LiteratureDetailsViewModel
 
@@ -31,8 +31,8 @@ class LiteratureDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _dataBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_literature_details,container, false)
-        val view = dataBinding.root
+        _binding = DataBindingUtil.inflate(inflater,R.layout.fragment_literature_details,container, false)
+        val view = binding.root
         return view
     }
 
@@ -48,16 +48,20 @@ class LiteratureDetailsFragment : Fragment() {
 
         observeLiveData()
     }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _dataBinding = null
-    }
 
     fun observeLiveData()
     {
-        viewModel.literatureLiveData.observe(viewLifecycleOwner, Observer {
-            dataBinding.selectedLiterature = it
+        viewModel.literatureLiveData.observe(viewLifecycleOwner, Observer { literature ->
+
+            literature?.let {
+
+                binding.selectedLiterature = literature
+            }
         })
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

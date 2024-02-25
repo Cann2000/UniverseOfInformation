@@ -3,7 +3,7 @@ package com.example.universeofinformation.modules
 import android.content.Context
 import androidx.room.Room
 import com.example.universeofinformation.service.dao.HistoryDao
-import com.example.universeofinformation.service.Room_Database
+import com.example.universeofinformation.service.database.Room_Database
 import com.example.universeofinformation.service.dao.CountryDao
 import com.example.universeofinformation.service.dao.FavoritesDao
 import com.example.universeofinformation.service.dao.GeographicEventDao

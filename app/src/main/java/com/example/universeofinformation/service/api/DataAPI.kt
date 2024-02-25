@@ -1,4 +1,4 @@
-package com.example.universeofinformation.service
+package com.example.universeofinformation.service.api
 
 import com.example.universeofinformation.model.InfoData
 import retrofit2.Response

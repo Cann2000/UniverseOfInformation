@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             app:layout_constraintEnd_toStartOf="@+id/geographicalEventsRecycler"
             app:layout_constraintStart_toStartOf="@+id/geographicalEventsRecycler"
-            tools:context=".view.GeographicEventListFragment">
+            tools:context=".view.geographic.GeographicEventListFragment">
 
 
             <com.google.android.material.card.MaterialCardView

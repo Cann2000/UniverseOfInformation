@@ -22,17 +22,20 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
                 android:layout_width="200dp"
-                android:layout_height="250dp"
+                android:layout_height="210dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="#D9DFE3"
                 app:cardCornerRadius="22dp"
-                android:layout_margin="10dp"
-                app:cardElevation="16dp"
-                app:cardBackgroundColor="#CCD6DD">
+                app:cardElevation="16dp">
 
                 <ImageView
                     android:id="@+id/menuImage"
-                    android:layout_width="200dp"
-                    android:layout_height="185dp"
-                    android:downloadImage="@{HomePageContent.imageUrl}"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:downloadImage="@{HomePageContent.imageUrl}" />
 
                 <TextView
                     android:id="@+id/menuName"
@@ -40,9 +43,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/menuImage"
                     android:layout_centerHorizontal="true"
-                    android:gravity="center"
                     android:layout_gravity="center"
-                    android:layout_marginTop="95dp"
+                    android:layout_marginTop="70dp"
+                    android:gravity="center"
                     android:text="@{HomePageContent.contentName}"
                     android:textAlignment="center"
                     android:textSize="@dimen/recycler_row_homepage_text_size"

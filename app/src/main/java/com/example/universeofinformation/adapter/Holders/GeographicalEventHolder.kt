@@ -3,16 +3,17 @@ package com.example.universeofinformation.adapter.Holders
 import android.view.View
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.example.universeofinformation.adapter.ClickListener
+import com.example.universeofinformation.utility.ClickListener
 import com.example.universeofinformation.databinding.RecyclerRowGeographicEventListBinding
 import com.example.universeofinformation.repository.GeographicQueryRepository
 import com.example.universeofinformation.utility.starClickedUtil
-import com.example.universeofinformation.view.GeographicEventListFragmentDirections
+import com.example.universeofinformation.view.geographic.GeographicEventListFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class GeographicalEventHolder(val binding: RecyclerRowGeographicEventListBinding, val geographicQueryRepository: GeographicQueryRepository): RecyclerView.ViewHolder(binding.root),ClickListener{
+class GeographicalEventHolder(val binding: RecyclerRowGeographicEventListBinding, val geographicQueryRepository: GeographicQueryRepository): RecyclerView.ViewHolder(binding.root),
+    ClickListener {
 
     override fun dataClicked(view: View) {
 

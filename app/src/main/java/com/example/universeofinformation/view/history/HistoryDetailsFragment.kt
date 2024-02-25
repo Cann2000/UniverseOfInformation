@@ -1,4 +1,4 @@
-package com.example.universeofinformation.view
+package com.example.universeofinformation.view.history
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,14 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.universeofinformation.R
 import com.example.universeofinformation.databinding.FragmentHistoryDetailsBinding
-import com.example.universeofinformation.viewmodel.HistoryDetailsViewModel
+import com.example.universeofinformation.viewmodel.history.HistoryDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HistoryDetailsFragment : Fragment() {
 
-    private var _dataBinding: FragmentHistoryDetailsBinding? = null
-    private val dataBinding get() = _dataBinding!!
+    private var _binding: FragmentHistoryDetailsBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: HistoryDetailsViewModel
 
@@ -31,8 +31,8 @@ class HistoryDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _dataBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_history_details,container, false)
-        val view = dataBinding.root
+        _binding = DataBindingUtil.inflate(inflater,R.layout.fragment_history_details,container, false)
+        val view = binding.root
         return view
     }
 
@@ -54,15 +54,19 @@ class HistoryDetailsFragment : Fragment() {
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _dataBinding = null
-    }
-
     fun observeLiveData()
     {
-        viewModel.historyLiveData.observe(viewLifecycleOwner, Observer {
-            dataBinding.selectedHistory = it
+        viewModel.historyLiveData.observe(viewLifecycleOwner, Observer { history ->
+
+            history?.let {
+
+                binding.selectedHistory = history
+            }
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

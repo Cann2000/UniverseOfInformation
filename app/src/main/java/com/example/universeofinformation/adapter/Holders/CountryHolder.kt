@@ -3,11 +3,11 @@ package com.example.universeofinformation.adapter.Holders
 import android.view.View
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.example.universeofinformation.adapter.ClickListener
+import com.example.universeofinformation.utility.ClickListener
 import com.example.universeofinformation.databinding.RecyclerRowCountryListBinding
 import com.example.universeofinformation.repository.CountryQueryRepository
 import com.example.universeofinformation.utility.starClickedUtil
-import com.example.universeofinformation.view.CountryListFragmentDirections
+import com.example.universeofinformation.view.country.CountryListFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

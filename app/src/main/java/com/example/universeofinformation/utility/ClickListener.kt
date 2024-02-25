@@ -1,4 +1,4 @@
-package com.example.universeofinformation.adapter
+package com.example.universeofinformation.utility
 
 import android.view.View
 

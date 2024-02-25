@@ -1,14 +1,13 @@
-package com.example.universeofinformation.viewmodel
+package com.example.universeofinformation.viewmodel.country
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.universeofinformation.adapter.DataAdapter
-import com.example.universeofinformation.model.GeographicEvent
+import com.example.universeofinformation.model.Country
 import com.example.universeofinformation.repository.APIRepository
-import com.example.universeofinformation.repository.GeographicQueryRepository
-import com.example.universeofinformation.repository.SharedPreferencesRepository
-import com.example.universeofinformation.utility.Constants.updateTime
+import com.example.universeofinformation.repository.CountryQueryRepository
+import com.example.universeofinformation.utility.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -21,13 +20,14 @@ import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
-class GeographicEventListViewModel @Inject constructor(private val apiRepository: APIRepository, val geographicQueryRepository: GeographicQueryRepository, private val sharedPreferencesRepository: SharedPreferencesRepository) :ViewModel() {
+class CountryListViewModel@Inject constructor(private val apiRepository: APIRepository, private val countryQueryRepository: CountryQueryRepository):ViewModel() {
 
-    val geographicalEvents = MutableLiveData<List<GeographicEvent>>()
+    val countrys = MutableLiveData<List<Country>>()
     val errorMessage = MutableLiveData<Boolean>()
     val uploading = MutableLiveData<Boolean>()
 
-    private lateinit var geographicEventList:List<GeographicEvent>
+    private lateinit var countryList:List<Country>
+    lateinit var adapter: DataAdapter
 
     private var job: Job? = null
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
@@ -37,15 +37,14 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
 
     fun refreshData(){
 
-        val saveTime = sharedPreferencesRepository.takeTime()
 
-        if (saveTime != null && saveTime != 0L && System.nanoTime() - saveTime < updateTime){ // updateTime in Constants
-            //Sqlite'tan çek
-            getDataFromSql()
+        if (Constants.loadCountry){
+
+            getDataFromInternet()
 
         } else {
 
-            getDataFromInternet()
+            getDataFromSql()
         }
     }
 
@@ -54,15 +53,7 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
         getDataFromInternet()
     }
 
-    fun showGeographicalEvents(geographicEventList:List<GeographicEvent>){
-
-        geographicalEvents.value = geographicEventList
-        this.geographicEventList = geographicEventList
-        errorMessage.value = false
-        uploading.value = false
-    }
-
-    fun getDataFromInternet()
+    private fun getDataFromInternet()
     {
         uploading.value = true
 
@@ -74,18 +65,21 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
 
                 if (response.isSuccessful) {
 
-                    val geographicalEvents = response.body()?.geographical_events
+                    val countries = response.body()?.turk_countries
 
-                    geographicalEvents?.let {
+                    countries?.let {
 
                         saveToSql(it).apply {
 
                             withContext(Dispatchers.Main){
 
+                                Constants.loadCountry = false
+
                                 delay(100)
                                 showGeographicalEvents(it)
                             }
                         }
+
                     }
                 }
             }
@@ -100,13 +94,13 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
 
             uploading.value = true
 
-            val geographicEventList = geographicQueryRepository.getAllGeographicalEvent()
+            val countryList = countryQueryRepository.getAllCountry()
 
-            if(!geographicEventList.isNullOrEmpty()){ // bu koşul eğer hiç internetten veri çekmeden ve sqle veri kaydetmeden sqlden veri çekmesini engeller
+            if(!countryList.isNullOrEmpty()){ // bu koşul eğer hiç internetten veri çekmeden ve sqle veri kaydetmeden sqlden veri çekmesini engeller
 
                 withContext(Dispatchers.Main){
 
-                    showGeographicalEvents(geographicEventList)
+                    showGeographicalEvents(countryList)
                 }
             }
             else{
@@ -115,15 +109,13 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
             }
         }
     }
-    private suspend fun saveToSql(geographicList: List<GeographicEvent>){
+    private suspend fun saveToSql(countryList: List<Country>){
 
-        geographicQueryRepository.insertAllGeographicEvent(geographicList)
-
-        sharedPreferencesRepository.saveTime(System.nanoTime())
+        countryQueryRepository.insertAllCountry(countryList)
     }
 
 
-    fun searchViewFilterList(query:String?,adapter:DataAdapter){
+    fun searchViewFilterList(query:String?,adapter: DataAdapter){
 
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
 
@@ -131,11 +123,12 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
 
                 val filteredList = ArrayList<Any>()
 
-                if(geographicEventList != null){
 
-                    geographicEventList.forEach {
+                if(countryList != null){
 
-                        val geographicEventName = it.eventName?.lowercase(Locale.ROOT)
+                    countryList.forEach {
+
+                        val geographicEventName = it.countryName?.lowercase(Locale.ROOT)
                         if(geographicEventName?.startsWith(query.lowercase(Locale.ROOT)) == true){
 
                             filteredList.add(it)
@@ -155,11 +148,19 @@ class GeographicEventListViewModel @Inject constructor(private val apiRepository
 
                 withContext(Dispatchers.Main){
 
-                    adapter.dataListUpdate(geographicEventList)
+                    adapter.dataListUpdate(countryList)
 
                 }
             }
         }
+    }
+
+    private fun showGeographicalEvents(countryList:List<Country>){
+
+        countrys.value = countryList
+        this.countryList = countryList
+        errorMessage.value = false
+        uploading.value = false
     }
 
     override fun onCleared() {

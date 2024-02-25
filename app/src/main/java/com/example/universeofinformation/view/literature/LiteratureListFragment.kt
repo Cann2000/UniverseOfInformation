@@ -1,4 +1,4 @@
-package com.example.universeofinformation.view
+package com.example.universeofinformation.view.literature
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,7 +14,8 @@ import com.example.universeofinformation.adapter.DataAdapter
 import com.example.universeofinformation.databinding.FragmentLiteratureListBinding
 import com.example.universeofinformation.repository.LiteratureQueryRepository
 import com.example.universeofinformation.utility.Constants
-import com.example.universeofinformation.viewmodel.LiteratureListViewModel
+import com.example.universeofinformation.utility.isNetworkAvailable
+import com.example.universeofinformation.viewmodel.literature.LiteratureListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -33,7 +34,7 @@ class LiteratureListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val isConnectedToNetwork = Constants.isNetworkAvailable(requireContext())
+        val isConnectedToNetwork = isNetworkAvailable(requireContext())
 
         if(!isConnectedToNetwork){
 
@@ -90,17 +91,20 @@ class LiteratureListFragment : Fragment() {
 
     fun observeLiveData(){
 
-        viewModel.literature.observe(viewLifecycleOwner, Observer {
+        viewModel.literature.observe(viewLifecycleOwner, Observer { literature ->
 
-            binding.literatureRecycler.visibility = View.VISIBLE
-            adapter.dataListUpdate(it)
+            literature?.let {
+
+                binding.literatureRecycler.visibility = View.VISIBLE
+                adapter.dataListUpdate(literature)
+            }
         })
 
-        viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { boolean ->
 
-            it?.let {
+            boolean?.let {
 
-                if (it) {
+                if (boolean == true) {
                     binding.literatureRecycler.visibility = View.GONE
                     binding.errorText.visibility = View.VISIBLE
                 } else {
@@ -110,11 +114,11 @@ class LiteratureListFragment : Fragment() {
             }
         })
 
-        viewModel.uploading.observe(viewLifecycleOwner, Observer {
+        viewModel.uploading.observe(viewLifecycleOwner, Observer { boolean ->
 
-            it?.let {
+            boolean?.let {
 
-                if (it) {
+                if (boolean == true) {
                     binding.literatureRecycler.visibility = View.GONE
                     binding.errorText.visibility = View.GONE
                     binding.loadProgressBar.visibility = View.VISIBLE

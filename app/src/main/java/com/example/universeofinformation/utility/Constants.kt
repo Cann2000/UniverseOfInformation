@@ -10,12 +10,9 @@ object Constants {
 
     const val TIME = "time" // shared preferences
 
-    const val updateTime = 30 * 60 * 1000 * 1000 * 1000L // 30 dk
+    var loadCountry:Boolean = true
+    var loadGeographic:Boolean = true
+    var loadHistory:Boolean = true
+    var loadLiterature:Boolean = true
 
-    fun isNetworkAvailable(context: Context): Boolean {
-        val service = Context.CONNECTIVITY_SERVICE
-        val manager = context.getSystemService(service) as ConnectivityManager?
-        val network = manager?.activeNetworkInfo
-        return (network != null)
-    }
 }

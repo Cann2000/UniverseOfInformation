@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             app:layout_constraintEnd_toStartOf="@+id/historyRecycler"
             app:layout_constraintStart_toStartOf="@+id/historyRecycler"
-            tools:context=".view.HistoryListFragment">
+            tools:context=".view.history.HistoryListFragment">
 
 
             <com.google.android.material.card.MaterialCardView

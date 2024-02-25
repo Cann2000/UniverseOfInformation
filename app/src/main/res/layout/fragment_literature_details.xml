@@ -22,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:context=".view.LiteratureDetailsFragment">
+            tools:context=".view.literature.LiteratureDetailsFragment">
 
             <ImageView
                 android:id="@+id/literatureImageView"

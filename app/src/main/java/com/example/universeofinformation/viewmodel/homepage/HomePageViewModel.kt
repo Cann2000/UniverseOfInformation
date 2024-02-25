@@ -1,4 +1,4 @@
-package com.example.universeofinformation.viewmodel
+package com.example.universeofinformation.viewmodel.homepage
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.universeofinformation.model.Favorite
 import com.example.universeofinformation.model.HomePageContent
 import com.example.universeofinformation.repository.FavoriteQueryRepository
-import com.example.universeofinformation.view.HomePageFragmentDirections
+import com.example.universeofinformation.view.homepage.HomePageFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
@@ -30,7 +30,8 @@ class HomePageViewModel@Inject constructor(private val favoriteQueryRepository: 
 
         contentList.clear()
 
-        val contentHistory = HomePageContent("Tarih","https://raw.githubusercontent.com/Cann2000/UniverseOfInformationData/main/PicturesContent/Tarih.jpg",HomePageFragmentDirections.actionHomePageFragmentToHistoryListFragment())
+        val contentHistory = HomePageContent("Tarih","https://raw.githubusercontent.com/Cann2000/UniverseOfInformationData/main/PicturesContent/Tarih.jpg",
+            HomePageFragmentDirections.actionHomePageFragmentToHistoryListFragment())
         val contentGeography = HomePageContent("Coğrafi Olaylar","https://raw.githubusercontent.com/Cann2000/UniverseOfInformationData/main/PicturesContent/Cografya.jpg",HomePageFragmentDirections.actionHomePageFragmentToGeographicalEventsFragment())
         val contentCountry = HomePageContent("Türk Devletleri","https://raw.githubusercontent.com/Cann2000/UniverseOfInformationData/main/PicturesContent/TurkDevletleri.png",HomePageFragmentDirections.actionHomePageFragmentToCountryListFragment())
         val contentLiterature = HomePageContent("Edebiyat","https://raw.githubusercontent.com/Cann2000/UniverseOfInformationData/main/PicturesContent/Edebiyat.jpg",HomePageFragmentDirections.actionHomePageFragmentToLiteratureListFragment())

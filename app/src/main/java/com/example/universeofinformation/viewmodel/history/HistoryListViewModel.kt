@@ -1,4 +1,4 @@
-package com.example.universeofinformation.viewmodel
+package com.example.universeofinformation.viewmodel.history
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,8 +7,7 @@ import com.example.universeofinformation.adapter.DataAdapter
 import com.example.universeofinformation.model.History
 import com.example.universeofinformation.repository.APIRepository
 import com.example.universeofinformation.repository.HistoryQueryRepository
-import com.example.universeofinformation.repository.SharedPreferencesRepository
-import com.example.universeofinformation.utility.Constants.updateTime
+import com.example.universeofinformation.utility.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -21,7 +20,7 @@ import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
-class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepository,private val historyQueryRepository: HistoryQueryRepository, private val sharedPreferencesRepository: SharedPreferencesRepository) : ViewModel() {
+class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepository,private val historyQueryRepository: HistoryQueryRepository) : ViewModel() {
 
     val history = MutableLiveData<List<History>>()
     val errorMessage = MutableLiveData<Boolean>()
@@ -30,25 +29,20 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
     private lateinit var historyList:List<History>
 
 
-    //private val compositeDisposable = CompositeDisposable()
-
-
     private var job: Job? = null
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         println(throwable.localizedMessage)
     }
 
-    fun refreshData()
-    {
-        val saveTime = sharedPreferencesRepository.takeTime()
+    fun refreshData() {
 
-        if (saveTime != null && saveTime != 0L && System.nanoTime() - saveTime < updateTime ){ // updateTime in Constants
-            //Sqlite'tan çek
-            getDataFromSql()
+        if (Constants.loadHistory){
 
-        } else {
             getDataFromInternet()
 
+        } else {
+
+            getDataFromSql()
         }
     }
 
@@ -57,13 +51,6 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
         getDataFromInternet()
     }
 
-    private fun showHistory(historyList:List<History>)
-    {
-        history.value=historyList
-        this.historyList = historyList
-        errorMessage.value = false
-        uploading.value = false
-    }
     private fun getDataFromInternet()
     {
         uploading.value = true
@@ -81,6 +68,8 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
                         saveToSql(it).apply {
 
                             withContext(Dispatchers.Main) {
+
+                                Constants.loadHistory = false
 
                                 delay(100)
                                 showHistory(it)
@@ -115,11 +104,9 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
         }
     }
 
-    private suspend fun saveToSql(historyList: List<History>)
-    {
-        historyQueryRepository.insertAllHistory(historyList)
+    private suspend fun saveToSql(historyList: List<History>) {
 
-        sharedPreferencesRepository.saveTime(System.nanoTime())
+        historyQueryRepository.insertAllHistory(historyList)
     }
 
     fun searchViewFilterList(query:String?,adapter:DataAdapter)
@@ -157,6 +144,14 @@ class HistoryListViewModel@Inject constructor(private val apiRepository: APIRepo
                 }
             }
         }
+    }
+
+    private fun showHistory(historyList:List<History>)
+    {
+        history.value=historyList
+        this.historyList = historyList
+        errorMessage.value = false
+        uploading.value = false
     }
 
     override fun onCleared() {

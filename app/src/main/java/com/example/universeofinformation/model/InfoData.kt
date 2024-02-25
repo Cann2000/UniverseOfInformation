@@ -2,12 +2,12 @@ package com.example.universeofinformation.model
 
 data class InfoData(
 
-    val geographical_events: List<GeographicEvent>,
+    val geographical_events: List<GeographicEvent>?,
 
-    val history_events: List<History>,
+    val history_events: List<History>?,
 
-    val  literary_works: List<Literature>,
+    val  literary_works: List<Literature>?,
 
-    val  turk_countries: List<Country>
+    val  turk_countries: List<Country>?
 
     )

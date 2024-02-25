@@ -1,4 +1,4 @@
-package com.example.universeofinformation.view
+package com.example.universeofinformation.view.country
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,15 +10,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.universeofinformation.R
 import com.example.universeofinformation.databinding.FragmentCountryDetailsBinding
-import com.example.universeofinformation.viewmodel.CountryDetailsViewModel
+import com.example.universeofinformation.viewmodel.country.CountryDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class CountryDetailsFragment : Fragment() {
 
-    private var _dataBinding: FragmentCountryDetailsBinding? = null
-    private val dataBinding get() = _dataBinding!!
+    private var _binding: FragmentCountryDetailsBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: CountryDetailsViewModel
 
@@ -32,8 +32,8 @@ class CountryDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _dataBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_country_details,container, false)
-        val view = dataBinding.root
+        _binding = DataBindingUtil.inflate(inflater,R.layout.fragment_country_details,container, false)
+        val view = binding.root
         return view
     }
 
@@ -48,17 +48,23 @@ class CountryDetailsFragment : Fragment() {
             viewModel.getCountry(countryId)
         }
 
-        obserLiveData()
+        observeLiveData()
     }
 
-    fun obserLiveData()
+    fun observeLiveData()
     {
-        viewModel.countryLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.countryLiveData.observe(viewLifecycleOwner, Observer { country ->
 
-            it?.let {
-                dataBinding.selectedCountry = it
+            country?.let {
+
+                binding.selectedCountry = country
             }
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

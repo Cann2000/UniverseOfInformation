@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             app:layout_constraintEnd_toStartOf="@+id/literatureRecycler"
             app:layout_constraintStart_toStartOf="@+id/literatureRecycler"
-            tools:context=".view.LiteratureListFragment">
+            tools:context=".view.literature.LiteratureListFragment">
 
 
             <com.google.android.material.card.MaterialCardView

@@ -1,19 +1,18 @@
-package com.example.universeofinformation.viewmodel
+package com.example.universeofinformation.viewmodel.history
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.universeofinformation.model.Literature
-import com.example.universeofinformation.repository.LiteratureQueryRepository
+import com.example.universeofinformation.model.History
+import com.example.universeofinformation.repository.HistoryQueryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
-class LiteratureDetailsViewModel@Inject constructor(private val literatureQueryRepository: LiteratureQueryRepository):ViewModel(){
+class HistoryDetailsViewModel@Inject constructor(private val historyQueryRepository: HistoryQueryRepository): ViewModel() {
 
-    val literatureLiveData = MutableLiveData<Literature>()
+    val historyLiveData = MutableLiveData<History>()
 
 
     fun getRoomData(uuid: Int)
@@ -21,8 +20,8 @@ class LiteratureDetailsViewModel@Inject constructor(private val literatureQueryR
         viewModelScope.launch {
             try {
                 //Bu işlem ana iş parçacığında yapılıyormuş gibi görünse de, historyQueryRepository.getHistory(uuid) withContext(Dispatchers.IO) içinde çalıştığı için arka planda çalışır.
-                val literature = literatureQueryRepository.getLiterature(uuid)
-                literatureLiveData.value = literature
+                val history = historyQueryRepository.getHistory(uuid)
+                historyLiveData.value = history
 
             } catch (e: Exception) {
 
@@ -30,4 +29,5 @@ class LiteratureDetailsViewModel@Inject constructor(private val literatureQueryR
             }
         }
 
-    }}
+    }
+}

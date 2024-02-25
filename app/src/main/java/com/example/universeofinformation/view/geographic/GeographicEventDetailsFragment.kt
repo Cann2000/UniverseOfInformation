@@ -1,4 +1,4 @@
-package com.example.universeofinformation.view
+package com.example.universeofinformation.view.geographic
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,14 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.universeofinformation.R
 import com.example.universeofinformation.databinding.FragmentGeographicEventDetailsBinding
-import com.example.universeofinformation.viewmodel.GeographicEventDetailsViewModel
+import com.example.universeofinformation.viewmodel.geographic.GeographicEventDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GeographicEventDetailsFragment : Fragment() {
 
-    private var _dataBinding: FragmentGeographicEventDetailsBinding? = null
-    private val dataBinding get() = _dataBinding!!
+    private var _binding: FragmentGeographicEventDetailsBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: GeographicEventDetailsViewModel
 
@@ -31,8 +31,8 @@ class GeographicEventDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _dataBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_geographic_event_details,container, false)
-        val view = dataBinding.root
+        _binding = DataBindingUtil.inflate(inflater,R.layout.fragment_geographic_event_details,container, false)
+        val view = binding.root
         return view
     }
 
@@ -50,18 +50,19 @@ class GeographicEventDetailsFragment : Fragment() {
         obserLiveData()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _dataBinding = null
-    }
-
     fun obserLiveData()
     {
-        viewModel.geographicEventLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.geographicEventLiveData.observe(viewLifecycleOwner, Observer { geographic_event ->
 
-            it?.let {
-                dataBinding.selectedGeographicEvent = it
+            geographic_event?.let {
+
+                binding.selectedGeographicEvent = geographic_event
             }
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

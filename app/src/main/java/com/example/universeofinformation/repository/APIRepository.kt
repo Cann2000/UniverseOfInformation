@@ -1,7 +1,7 @@
 package com.example.universeofinformation.repository
 
 import com.example.universeofinformation.model.InfoData
-import com.example.universeofinformation.service.DataAPI
+import com.example.universeofinformation.service.api.DataAPI
 import retrofit2.Response
 import javax.inject.Inject
 

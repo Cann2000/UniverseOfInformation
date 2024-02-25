@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             app:layout_constraintEnd_toStartOf="@+id/countryRecycler"
             app:layout_constraintStart_toStartOf="@+id/countryRecycler"
-            tools:context=".view.CountryListFragment">
+            tools:context=".view.country.CountryListFragment">
 
 
             <com.google.android.material.card.MaterialCardView

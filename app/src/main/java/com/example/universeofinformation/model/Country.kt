@@ -10,11 +10,11 @@ data class Country(
 
     @ColumnInfo(name = "CountryName")
     @SerializedName("name")
-    val countryName:String,
+    val countryName:String?,
 
     @ColumnInfo(name = "Capital")
     @SerializedName("capital")
-    val capital:String,
+    val capital:String?,
 
     @ColumnInfo(name = "Year")
     @SerializedName("year")
@@ -30,11 +30,11 @@ data class Country(
 
     @ColumnInfo(name = "Population")
     @SerializedName("population")
-    val population:String,
+    val population:String?,
 
     @ColumnInfo(name = "ImageUrl")
     @SerializedName("ImageUrl")
-    val imageUrl:String,
+    val imageUrl:String?,
 
     @ColumnInfo(name = "Starred")
     var starred:Boolean = false

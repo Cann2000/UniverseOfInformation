@@ -1,4 +1,4 @@
-package com.example.universeofinformation.view
+package com.example.universeofinformation.view.history
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +15,8 @@ import com.example.universeofinformation.adapter.DataAdapter
 import com.example.universeofinformation.databinding.FragmentHistoryListBinding
 import com.example.universeofinformation.repository.HistoryQueryRepository
 import com.example.universeofinformation.utility.Constants
-import com.example.universeofinformation.viewmodel.HistoryListViewModel
+import com.example.universeofinformation.utility.isNetworkAvailable
+import com.example.universeofinformation.viewmodel.history.HistoryListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -25,8 +26,6 @@ class HistoryListFragment : Fragment() {
 
     @Inject
     lateinit var historyListQueryRepository: HistoryQueryRepository
-
-    private lateinit var permissionLauncher: ActivityResultLauncher<String>
 
     private var _binding: FragmentHistoryListBinding? = null
     private val binding get() = _binding!!
@@ -38,7 +37,7 @@ class HistoryListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val isConnectedToNetwork = Constants.isNetworkAvailable(requireContext())
+        val isConnectedToNetwork = isNetworkAvailable(requireContext())
 
         if(!isConnectedToNetwork){
 
@@ -122,29 +121,23 @@ class HistoryListFragment : Fragment() {
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-
     fun observeLiveData() {
 
 
-        viewModel.history.observe(viewLifecycleOwner, Observer {
+        viewModel.history.observe(viewLifecycleOwner, Observer { history ->
 
-            it?.let {
+            history?.let {
 
                 binding.historyRecycler.visibility = View.VISIBLE
-                adapter.dataListUpdate(it)
+                adapter.dataListUpdate(history)
             }
         })
 
-        viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { boolean ->
 
-            it?.let {
+            boolean?.let {
 
-                if (it) {
+                if (boolean == true) {
                     binding.historyRecycler.visibility = View.GONE
                     binding.errorText.visibility = View.VISIBLE
                 } else {
@@ -154,11 +147,11 @@ class HistoryListFragment : Fragment() {
             }
         })
 
-        viewModel.uploading.observe(viewLifecycleOwner, Observer {
+        viewModel.uploading.observe(viewLifecycleOwner, Observer { boolean ->
 
-            it?.let {
+            boolean?.let {
 
-                if (it) {
+                if (boolean == true) {
                     binding.historyRecycler.visibility = View.GONE
                     binding.errorText.visibility = View.GONE
                     binding.loadProgressBar.visibility = View.VISIBLE
@@ -167,5 +160,10 @@ class HistoryListFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -22,6 +22,7 @@ class HomePageAdapter(var contentList:ArrayList<HomePageContent>):RecyclerView.A
         holder.binding.homePageContent = contentList[position]
 
         holder.itemView.setOnClickListener {
+
             Navigation.findNavController(it).navigate(contentList[position].action)
         }
     }
