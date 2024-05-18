@@ -4,7 +4,7 @@ Hello, the purpose of my application, which I made with Kotlin, is to access var
 
 
 # Technicial Specifications
-I am pulling data from the internet in my application. Then I save the data I obtain to my database. If new data is added or updated, I retrieve the data from the internet every 30 minutes to ensure that these changes reach the user again. While developing my application, I developed it in accordance with the 🌟MVVM structure and 🌟Clean Architecture. The libraries and features I use are as follows:
+I am pulling data from the internet in my application. Then, I save the data I obtain to my database. And I show this data to the user. While developing my application, I developed it in accordance with the 🌟MVVM structure and 🌟Clean Architecture. The libraries and features I use are as follows:
 
 - Dependency injection-Hilt
 - Navigation Component
